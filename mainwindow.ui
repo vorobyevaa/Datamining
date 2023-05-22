@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>787</width>
+    <height>794</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pb_start">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>720</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Старт</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_delete">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>720</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Отмена</string>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>771</width>
+      <height>701</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="firstWay">
+     <attribute name="title">
+      <string>Tab 1</string>
+     </attribute>
+     <widget class="QToolBox" name="tb_menu">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>771</width>
+        <height>671</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="p_data">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>771</width>
+         <height>543</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Данные</string>
+       </attribute>
+       <widget class="QFrame" name="frame_table">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>0</y>
+          <width>631</width>
+          <height>301</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="p_statistics">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>771</width>
+         <height>543</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Статистика</string>
+       </attribute>
+       <widget class="QFrame" name="f_statistic">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>761</width>
+          <height>461</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="p_visual">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>771</width>
+         <height>543</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Графика</string>
+       </attribute>
+       <widget class="QFrame" name="frame_chart">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>10</y>
+          <width>541</width>
+          <height>531</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>30</y>
+          <width>141</width>
+          <height>311</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>График</string>
+        </property>
+        <widget class="QComboBox" name="cb_plot">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>линейный график</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>гистограмма</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>круговая диаграмма</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>линейчатая диаграмма</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>точечный</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>сплайн</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QLabel" name="l_plot">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>81</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Тип графика</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="l_plot_valuex">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>81</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Значение по x</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="cb_valuex">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>90</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="l_plot_valuey">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>81</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Значение по у</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="cb_valuey">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="l_plot_color">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>170</y>
+           <width>81</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Зависимость от</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="cb_color">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>190</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="l_plot_size">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>220</y>
+           <width>81</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Размер</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="cb_size">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>240</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="pb_start_2">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>380</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Построить</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>410</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Добавить </string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="p_info">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>771</width>
+         <height>543</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Информация</string>
+       </attribute>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="secondWay">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+     <widget class="QPushButton" name="pb_next">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>60</y>
+        <width>121</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Следующий шаг</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="gb_model">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>731</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Управление</string>
+      </property>
+      <widget class="QCheckBox" name="cb_load_4">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>111</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Загрузка данных</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="cb_type_model_7">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>500</x>
+         <y>20</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Типы моделей</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="cb_select_task_4">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>111</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Выбрать задачу</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="cb_select_target_4">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>249</x>
+         <y>20</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Выбрать цель</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="cb_select_value_4">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>20</y>
+         <width>121</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Выбрать значение</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="cb_type_model_8">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>610</x>
+         <y>20</y>
+         <width>121</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Результат</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>787</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_file">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="action_import"/>
+    <addaction name="action_save"/>
+    <addaction name="action_exit"/>
+   </widget>
+   <widget class="QMenu" name="menu_edit">
+    <property name="title">
+     <string>Редактирование</string>
+    </property>
+    <addaction name="action_endo"/>
+    <addaction name="action_copy"/>
+    <addaction name="action_paste"/>
+    <addaction name="action_delete"/>
+   </widget>
+   <widget class="QMenu" name="menu_help">
+    <property name="title">
+     <string>Справка</string>
+    </property>
+    <addaction name="action_support"/>
+    <addaction name="action_doc"/>
+    <addaction name="action_about"/>
+   </widget>
+   <addaction name="menu_file"/>
+   <addaction name="menu_edit"/>
+   <addaction name="menu_help"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_import">
+   <property name="text">
+    <string>Загрузка данных</string>
+   </property>
+  </action>
+  <action name="action_save">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="action_exit">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="action_endo">
+   <property name="text">
+    <string>Назад</string>
+   </property>
+  </action>
+  <action name="action_copy">
+   <property name="text">
+    <string>Копировать</string>
+   </property>
+  </action>
+  <action name="action_paste">
+   <property name="text">
+    <string>Вставить</string>
+   </property>
+  </action>
+  <action name="action_delete">
+   <property name="text">
+    <string>Удалить</string>
+   </property>
+  </action>
+  <action name="action_support">
+   <property name="text">
+    <string>Техническая поддержка</string>
+   </property>
+  </action>
+  <action name="action_doc">
+   <property name="text">
+    <string>Документация</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
