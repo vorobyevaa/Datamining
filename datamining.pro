@@ -17,12 +17,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     datameaning.cpp \
+    datameaningcore.cpp \
     datarow.cpp \
     main.cpp \
     mainwindow.cpp ptable.cpp chart.cpp \
 
 HEADERS += \
     datameaning.h \
+    datameaningcore.h \
     datarow.h \
     mainwindow.h ptable.h chart.h \
 
@@ -36,3 +38,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     datamining.qrc
+
+INCLUDEPATH += pythonqt/src/ \
+    /usr/include/python3.8
+
+SUBDIRS += pythonqt
+
