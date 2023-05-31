@@ -16,11 +16,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    datameaning.cpp \
+    datarow.cpp \
     main.cpp \
-    mainwindow.cpp ptable.cpp chart.cpp
+    mainwindow.cpp ptable.cpp chart.cpp \
 
 HEADERS += \
-    mainwindow.h ptable.h chart.h
+    datameaning.h \
+    datarow.h \
+    mainwindow.h ptable.h chart.h \
 
 FORMS += \
     mainwindow.ui

@@ -1,0 +1,22 @@
+#ifndef DATAMEANING_H
+#define DATAMEANING_H
+
+#include <QByteArray>
+#include <QList>
+#include <QVector>
+#include "datarow.h"
+
+class DataMeaning
+{
+public:
+    DataMeaning();
+    void load(QList<QByteArray> content);
+    QVector <QVector <QString>> loadedMatrix() const;
+    int getFieldsSize() const;
+    QVector <QString> fieldsHeader() const;
+private:
+    QVector <DataRow> dataRows;
+    QList <QByteArray> header;
+};
+
+#endif // DATAMEANING_H

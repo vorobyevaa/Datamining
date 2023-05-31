@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "ptable.h"
 #include "chart.h"
+#include "datameaning.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,5 +27,7 @@ private:
     Ptable * ptStaticticData;
     Chart * chChart;
 
+
+    DataMeaning dataMeaning;
 };
 #endif // MAINWINDOW_H

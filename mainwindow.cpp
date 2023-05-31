@@ -23,7 +23,7 @@ void MainWindow::importFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("Text (*.txt *.csv)"));
     qDebug()<<fileName;
-            if (fileName.trimmed().right(4) != ".txt") fileName = fileName + ".txt";
+        //    if (fileName.trimmed().right(4) != ".txt") fileName = fileName + ".txt";
 
             QFile file(fileName);
             if (fileName == ".fileName" || !file.open(QIODevice::ReadOnly))
@@ -34,6 +34,9 @@ void MainWindow::importFile()
             else
             {
                 QTextStream in(&file);
-                qDebug()<<file.readAll();
+                dataMeaning.load(file.readAll().split('\n'));
+
+                ptLoadedData->setHeader(dataMeaning.fieldsHeader());
+                ptLoadedData->setValues(dataMeaning.loadedMatrix());
             }
 }

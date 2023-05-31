@@ -41,35 +41,27 @@ Ptable :: Ptable(QWidget * owner) : QTableWidget(owner) {
 
 }
 
-void Ptable :: setValues(QVector <QVector <double> > values)
+void Ptable :: setValues(QVector <QVector <QString> > values)
 {
-    this->setRowCount(values[0].size()+1);
-    for (int i = 0; i < values[0].size(); i++)
+    this->setRowCount(values.size()+1);
+    for (int i = 0; i < values.size(); i++)
     {
          _createRow(i+1);
-        for (int j = 0; j < values.size(); j++) {
+        for (int j = 0; j < values[i].size(); j++) {
             QTableWidgetItem * twiJ = new QTableWidgetItem();
-            twiJ->setText(QString::number(values[j][i]));
-            this->setItem(i+1,j+1,twiJ);
+            twiJ->setText(values[i][j]);
+            this->setItem(i,j,twiJ);
         }
     }
 }
 
-void Ptable :: setValues(QVector <QPair <double, double> > values, double a)
+void Ptable :: setHeader(QVector <QString> header)
 {
-    this->setRowCount(values.size()+1);
-    QTableWidgetItem * twiA = new QTableWidgetItem();
-    twiA->setText(QString::number(a));
-    this->setItem(0,1,twiA);
-
-    for (int i = 0; i < values.size(); i++) 
-    {
-         _createRow(i+1);
-        for (int j = 0; j < 2; j++) {
-            QTableWidgetItem * twiJ = new QTableWidgetItem();
-            twiJ->setText(QString::number((j == 0) ? values[i].first : values[i].second));
-            this->setItem(i+1,j+1,twiJ);
-        }
+    this->setColumnCount(header.size());
+    for (int i = 0; i < header.size(); i++) {
+        QTableWidgetItem *twiBord = new QTableWidgetItem();
+        twiBord->setText(header[i]);
+        this->setHorizontalHeaderItem(i,twiBord);
     }
 }
 

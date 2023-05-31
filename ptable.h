@@ -8,8 +8,8 @@ class Ptable : public QTableWidget
     Q_OBJECT
 public:
     Ptable(QWidget * owner = 0);
-    void setValues(QVector <QVector <double> > values);
-    void setValues(QVector <QPair <double, double> > values, double a);
+    void setValues(QVector <QVector <QString> > values);
+    void setHeader(QVector <QString> header);
     bool checkValues(bool showMessageFlag);
     QVector <QPair <double, double> > values() const;
     QVector <QVector <double> > allValues() const;
