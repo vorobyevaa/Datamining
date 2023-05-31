@@ -1,7 +1,7 @@
 #ifndef DATAMEANINGCORE_H
 #define DATAMEANINGCORE_H
 
-#include <PythonQt.h>
+//#include <PythonQt.h>
 
 class DataMeaningCore
 {

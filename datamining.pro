@@ -39,8 +39,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     datamining.qrc
 
-INCLUDEPATH += pythonqt/src/ \
-    /usr/include/python3.8
+#INCLUDEPATH += pythonqt/src/ \
+   # /usr/include/python3.8
 
-SUBDIRS += pythonqt
+#SUBDIRS += pythonqt
 

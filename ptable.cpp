@@ -50,18 +50,18 @@ void Ptable :: setValues(QVector <QVector <QString> > values)
         for (int j = 0; j < values[i].size(); j++) {
             QTableWidgetItem * twiJ = new QTableWidgetItem();
             twiJ->setText(values[i][j]);
-            this->setItem(i,j,twiJ);
+            this->setItem(i,j+1,twiJ);
         }
     }
 }
 
 void Ptable :: setHeader(QVector <QString> header)
 {
-    this->setColumnCount(header.size());
+    this->setColumnCount(header.size()+1);
     for (int i = 0; i < header.size(); i++) {
         QTableWidgetItem *twiBord = new QTableWidgetItem();
         twiBord->setText(header[i]);
-        this->setHorizontalHeaderItem(i,twiBord);
+        this->setHorizontalHeaderItem(i+1,twiBord);
     }
 }
 
