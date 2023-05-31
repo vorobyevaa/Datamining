@@ -9,7 +9,7 @@ Ptable :: Ptable(QWidget * owner) : QTableWidget(owner) {
     this->resize(500,500);
 
     // формируем столбцы
-    QString captions[] = {"", "границы \n отрезков", "вероятность \n распределения"};
+    QString captions[] = {"", "", ""};
     for (int i = 0; i < 3; i++) {
         QTableWidgetItem *twiBord = new QTableWidgetItem();
         twiBord->setText(captions[i]);
