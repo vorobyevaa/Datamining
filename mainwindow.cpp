@@ -38,5 +38,8 @@ void MainWindow::importFile()
 
                 ptLoadedData->setHeader(dataMeaning.fieldsHeader());
                 ptLoadedData->setValues(dataMeaning.loadedMatrix());
+
+                ptStaticticData->setHeader(dataMeaning.fieldsStatisticHeader());
+                ptStaticticData->setValues(dataMeaning.statisticMatrix());
             }
 }

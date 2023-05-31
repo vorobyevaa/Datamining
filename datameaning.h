@@ -12,8 +12,10 @@ public:
     DataMeaning();
     void load(QList<QByteArray> content);
     QVector <QVector <QString>> loadedMatrix() const;
+    QVector <QVector <QString>> statisticMatrix() const;
     int getFieldsSize() const;
     QVector <QString> fieldsHeader() const;
+    QVector <QString> fieldsStatisticHeader() const;
 private:
     QVector <DataRow> dataRows;
     QList <QByteArray> header;
