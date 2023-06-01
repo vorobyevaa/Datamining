@@ -26,6 +26,9 @@ private:
 private slots:
     void sl_cellClicked(int row, int column);
 
+signals:
+    void removeRowSignal(int index);
+
 };
 
 #endif

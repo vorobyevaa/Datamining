@@ -30,7 +30,7 @@ Ptable :: Ptable(QWidget * owner) : QTableWidget(owner) {
     this->setVerticalHeaderItem(0,twiBord);
 
         QTableWidgetItem *thumbnail = new QTableWidgetItem;
-        thumbnail->setData(Qt::DecorationRole, QPixmap::fromImage(*img).scaled(20,20));
+    //    thumbnail->setData(Qt::DecorationRole, QPixmap::fromImage(*img).scaled(20,20));
 
         this->setItem(0, 0, thumbnail);
 
@@ -43,10 +43,10 @@ Ptable :: Ptable(QWidget * owner) : QTableWidget(owner) {
 
 void Ptable :: setValues(QVector <QVector <QString> > values)
 {
-    this->setRowCount(values.size()+1);
+    this->setRowCount(values.size());
     for (int i = 0; i < values.size(); i++)
     {
-         _createRow(i+1);
+         _createRow(i);
         for (int j = 0; j < values[i].size(); j++) {
             QTableWidgetItem * twiJ = new QTableWidgetItem();
             twiJ->setText(values[i][j]);
@@ -68,7 +68,7 @@ void Ptable :: setHeader(QVector <QString> header)
 void Ptable :: _createRow(int rowIndex)
 {
     QImage *img = new QImage();
-    bool loaded = img->load(QDir::currentPath() + "/img/remove.jpeg");
+    img->load(QDir::currentPath() + "/img/remove.jpeg");
     QTableWidgetItem *thumbnail = new QTableWidgetItem();
     thumbnail->setData(Qt::DecorationRole, QPixmap::fromImage(*img).scaled(20,20));
     this->setItem(rowIndex, 0, thumbnail);
@@ -87,7 +87,7 @@ void Ptable :: sl_cellClicked(int row, int column)
         msgBox.setText("Действительно удалить строку?");
         msgBox.setStandardButtons(QMessageBox::Ok |  QMessageBox::Cancel);
         msgBox.setDefaultButton(QMessageBox::Save);
-       int ret = msgBox.exec();
+        int ret = msgBox.exec();
         if (ret == QMessageBox::Ok) {
             this->removeRow(row);
             for (int i = row; i < this->rowCount(); i++) {
@@ -95,6 +95,7 @@ void Ptable :: sl_cellClicked(int row, int column)
                 twiBord->setText(QString::number(i));
                 this->setVerticalHeaderItem(i,twiBord);
             }
+            emit removeRowSignal(row);
         }
     }
     else {

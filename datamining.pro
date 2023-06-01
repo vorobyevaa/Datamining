@@ -20,13 +20,15 @@ SOURCES += \
     datameaningcore.cpp \
     datarow.cpp \
     main.cpp \
-    mainwindow.cpp ptable.cpp chart.cpp
+    mainwindow.cpp ptable.cpp chart.cpp \
+    pythonparameter.cpp
 
 HEADERS += \
     datameaning.h \
     datameaningcore.h \
     datarow.h \
     mainwindow.h ptable.h chart.h \
+    pythonparameter.h
 
 FORMS += \
     mainwindow.ui
@@ -61,7 +63,5 @@ include ( $$PWD/pythonqt/common.prf )
 include ( $$PWD/pythonqt/python.prf )
 include ( $$PWD/pythonqt/PythonQt.prf )
 include ( $$PWD/pythonqt/PythonQt_QtAll.prf )
-include ( $$PWD/pythonqt/lib/libPythonQt_QtAll-Qt5-Python2.7.prl )
-include ( $$PWD/pythonqt/lib/libPythonQt-Qt5-Python2.7.prl )
 include($$PWD/pythonqt/src.pri)
 

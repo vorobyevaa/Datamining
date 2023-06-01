@@ -17,6 +17,7 @@ public:
     int getFieldsSize() const;
     QVector <QString> fieldsHeader() const;
     QVector <QString> fieldsStatisticHeader() const;
+    void removeRow(int index);
 private:
     QVector <DataRow> dataRows;
     QList <QByteArray> header;

@@ -20,6 +20,7 @@ public:
 
 private slots:
     void importFile();
+    void removeLoadedDataRow(int index);
 
 private:
     Ui::MainWindow *ui;

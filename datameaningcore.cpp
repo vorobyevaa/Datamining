@@ -1,23 +1,40 @@
 #include "datameaningcore.h"
 #include <QtDebug>
+#include <QFile>
+#include <QCoreApplication>
+#include <QIODevice>
+#include "gui/PythonQtScriptingConsole.h"
+#include "pythonparameter.h"
 
-DataMeaningCore::DataMeaningCore()
+DataMeaningCore :: DataMeaningCore()
 {
-     PythonQt::init();
+    PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut);
+    mainModule = PythonQt::self()->getMainModule();
+}
 
-     // get a smart pointer to the __main__ module of the Python interpreter
-    // PythonQtObjectPtr context = PythonQt::self()->getMainModule();
+void DataMeaningCore :: callStatisticPy(QVector <DataRow> dataRows, QList <QByteArray> header)
+{
+    PythonQtScriptingConsole console(NULL, mainModule);
+    PythonQt::self()->registerCPPClass("PythonParameter", "","example", PythonQtCreateObject<PythonParameterWrapper>);
 
-     qDebug()<<"init python";
 
-     // add a QObject as variable of name "example" to the namespace of the __main__ module
-   /*  PyExampleObject example;
-     context.addObject("example", &example);
+    QString content = "";
+    for (int i = 0; i < dataRows.size(); i++)
+    {
+        QString row = "";
+        for (int j = 0; j < header.size(); j++)
+        {
+            if (j > 0) row = row + ",";
+            row = row + dataRows[i].value(header[j]);
+        }
+        content = content + row + "\n";
+    }
+    QFile file(QCoreApplication::applicationDirPath() + "/statistic.tmp");
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << content << endl;
+    }
+    file.close();
 
-     // do something
-     context.evalScript("print example");
-     context.evalScript("def multiply(a,b):\n  return a*b;\n");
-     QVariantList args;
-     args << 42 << 47;
-     QVariant result = context.call("multiply", args);*/
+    mainModule.evalFile(QCoreApplication::applicationDirPath() + "/test.py");
 }

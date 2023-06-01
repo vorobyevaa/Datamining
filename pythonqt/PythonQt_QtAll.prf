@@ -12,4 +12,4 @@ CONFIG(debug, debug|release) {
 
 win32-g++: LIBS += $$DESTDIR/../lib/PythonQt_QtAll-Qt5-Python$${PYTHON_VERSION}$${DEBUG_EXT}.dll
 win32-msvc*: LIBS += $$DESTDIR/../lib/PythonQt_QtAll-Qt5-Python$${PYTHON_VERSION}$${DEBUG_EXT}.lib
-unix: LIBS += -L$$DESTDIR/lib/-lPythonQt_QtAll-Qt5-Python$${PYTHON_VERSION}$${DEBUG_EXT}
+unix: LIBS += -L$$PWD/lib/libPythonQt_QtAll-Qt5-Python$${PYTHON_VERSION}$${DEBUG_EXT}.so

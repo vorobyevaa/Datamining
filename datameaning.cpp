@@ -8,7 +8,6 @@ DataMeaning :: DataMeaning()
 
 void DataMeaning::load(QList<QByteArray> content)
 {
-
     if (content.size() == 0) {
         return;
     }
@@ -16,11 +15,14 @@ void DataMeaning::load(QList<QByteArray> content)
     header = content[0].split(',');
     if (content.size() > 1) {
         qDebug()<<(content.size()-1);
-        dataRows.resize(content.size()-1);
         for (int i = 1; i < content.size(); i++) {
-            dataRows[i-1] = DataRow(content[i], header);
-       }
-   }
+            if (content[i].trimmed() != "") {
+                dataRows.push_back(DataRow(content[i], header));
+            }
+        }
+    }
+
+    dataMeaningCore.callStatisticPy(dataRows, header);
 }
 
 QVector <QVector <QString>>  DataMeaning::loadedMatrix() const
@@ -84,10 +86,17 @@ QVector <QString> DataMeaning::fieldsStatisticHeader() const
     return result;
 }
 
-QVector <QString> DataMeaning :: fieldsHeader() const {
+QVector <QString> DataMeaning :: fieldsHeader() const
+{
     QVector <QString> result(header.size());
     for (int i = 0; i < result.size(); i++) {
         result[i] = header[i];
     }
     return result;
+}
+
+void DataMeaning :: removeRow(int index)
+{
+    dataRows.remove(index);
+    dataMeaningCore.callStatisticPy(dataRows, header);
 }

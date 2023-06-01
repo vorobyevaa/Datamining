@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     chChart = new Chart(ui->frame_chart);
 
     connect(ui->action_import, &QAction::triggered, this, &MainWindow::importFile);
+    connect(ptLoadedData, SIGNAL(removeRowSignal(int)), this, SLOT(removeLoadedDataRow(int)));
 }
 
 MainWindow::~MainWindow()
@@ -23,23 +24,29 @@ void MainWindow::importFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("Text (*.txt *.csv)"));
     qDebug()<<fileName;
-        //    if (fileName.trimmed().right(4) != ".txt") fileName = fileName + ".txt";
 
-            QFile file(fileName);
-            if (fileName == ".fileName" || !file.open(QIODevice::ReadOnly))
-            {
-                QMessageBox::information(this, "Невозможно открыть файл", file.errorString());
-                return;
-            }
-            else
-            {
-                QTextStream in(&file);
-                dataMeaning.load(file.readAll().split('\n'));
+    QFile file(fileName);
+    if (fileName == ".fileName" || !file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::information(this, "Невозможно открыть файл", file.errorString());
+        return;
+    }
+    else
+    {
+        QTextStream in(&file);
+        dataMeaning.load(file.readAll().split('\n'));
 
-                ptLoadedData->setHeader(dataMeaning.fieldsHeader());
-                ptLoadedData->setValues(dataMeaning.loadedMatrix());
+        ptLoadedData->setHeader(dataMeaning.fieldsHeader());
+        ptLoadedData->setValues(dataMeaning.loadedMatrix());
 
-                ptStaticticData->setHeader(dataMeaning.fieldsStatisticHeader());
-                ptStaticticData->setValues(dataMeaning.statisticMatrix());
-            }
+        ptStaticticData->setHeader(dataMeaning.fieldsStatisticHeader());
+        ptStaticticData->setValues(dataMeaning.statisticMatrix());
+    }
+}
+
+
+void MainWindow :: removeLoadedDataRow(int index)
+{
+    dataMeaning.removeRow(index);
+    ptStaticticData->setValues(dataMeaning.statisticMatrix());
 }
