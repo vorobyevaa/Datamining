@@ -14,6 +14,7 @@ win32-msvc*:QMAKE_CXXFLAGS += /bigobj
 # Force linker to complain on undefined references for dll/so/dylib build when possible
 QMAKE_LFLAGS_SHLIB += $$QMAKE_LFLAGS_NOUNDEF
 
+
 HEADERS +=                    \
   $$PWD/PythonQt.h                  \
   $$PWD/PythonQtStdDecorators.h     \

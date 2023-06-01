@@ -5,6 +5,7 @@
 #include <QList>
 #include <QVector>
 #include "datarow.h"
+#include "datameaningcore.h"
 
 class DataMeaning
 {
@@ -19,6 +20,7 @@ public:
 private:
     QVector <DataRow> dataRows;
     QList <QByteArray> header;
+    DataMeaningCore dataMeaningCore;
 };
 
 #endif // DATAMEANING_H

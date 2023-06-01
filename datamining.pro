@@ -21,6 +21,7 @@ SOURCES += \
     datarow.cpp \
     main.cpp \
     mainwindow.cpp ptable.cpp chart.cpp \
+    pythonqt\src\*
 
 HEADERS += \
     datameaning.h \
@@ -30,6 +31,8 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui
+
+OBJECTS_DIR = obj
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -42,5 +45,7 @@ RESOURCES += \
 INCLUDEPATH += pythonqt/src/ \
     /usr/include/python3.8
 
-SUBDIRS += pythonqt
+SUBDIRS += pythonqt/src
+
+include("pythonqt/src/src.pri");
 
