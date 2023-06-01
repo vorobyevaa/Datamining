@@ -20,8 +20,7 @@ SOURCES += \
     datameaningcore.cpp \
     datarow.cpp \
     main.cpp \
-    mainwindow.cpp ptable.cpp chart.cpp \
-    pythonqt\src\*
+    mainwindow.cpp ptable.cpp chart.cpp
 
 HEADERS += \
     datameaning.h \
@@ -33,6 +32,7 @@ FORMS += \
     mainwindow.ui
 
 OBJECTS_DIR = obj
+MOC_DIR = moc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -42,10 +42,26 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     datamining.qrc
 
-INCLUDEPATH += pythonqt/src/ \
-    /usr/include/python3.8
 
-SUBDIRS += pythonqt/src
 
-include("pythonqt/src/src.pri");
+unix {
+  CONFIG += create_pc create_prl no_install_prl
+  QMAKE_PKGCONFIG_NAME = $${TARGET}
+  QMAKE_PKGCONFIG_DESCRIPTION = Dynamic Python binding for the Qt framework
+  QMAKE_PKGCONFIG_PREFIX = $$INSTALLBASE
+  QMAKE_PKGCONFIG_LIBDIR = $$target.path
+  QMAKE_PKGCONFIG_INCDIR = $$headers.path
+  QMAKE_PKGCONFIG_INCDIR += ${prefix}/include/python3.8
+  QMAKE_PKGCONFIG_VERSION = $$VERSION
+
+  INCLUDEPATH += /usr/include/python
+}
+
+include ( $$PWD/pythonqt/common.prf )
+include ( $$PWD/pythonqt/python.prf )
+include ( $$PWD/pythonqt/PythonQt.prf )
+include ( $$PWD/pythonqt/PythonQt_QtAll.prf )
+include ( $$PWD/pythonqt/lib/libPythonQt_QtAll-Qt5-Python2.7.prl )
+include ( $$PWD/pythonqt/lib/libPythonQt-Qt5-Python2.7.prl )
+include($$PWD/pythonqt/src.pri)
 
