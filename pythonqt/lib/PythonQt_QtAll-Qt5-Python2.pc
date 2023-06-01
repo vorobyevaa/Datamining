@@ -1,0 +1,12 @@
+prefix=/data/qt/5.12.9/gcc_64
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=/include/PythonQt5
+
+
+Name: PythonQt_QtAll-Qt5-Python2.7
+Description: Dynamic Python binding for the Qt framework
+Version: 3.2.0
+Libs: -L${libdir} -lPythonQt_QtAll-Qt5-Python2.7 
+Cflags: -I${includedir}
+
