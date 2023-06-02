@@ -1,8 +1,8 @@
 #ifndef PYTHONPARAMETER_H
 #define PYTHONPARAMETER_H
 
-#include "PythonQt.h"
-#include "PythonQtCppWrapperFactory.h"
+//#include "PythonQt.h"
+//#include "PythonQtCppWrapperFactory.h"
 #include <QObject>
 
 class PythonParameter

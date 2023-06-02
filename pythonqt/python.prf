@@ -1,12 +1,11 @@
 # profile to include and link Python
 
 
-# Change this variable to your python version (2.6, 2.7, 3.3, ...)
 isEmpty( PYTHON_VERSION ) {
   PYTHON_VERSION=$$(PYTHON_VERSION)
 }
 isEmpty( PYTHON_VERSION ) {
-  PYTHON_VERSION=2.7
+  PYTHON_VERSION=3.8
 }
 
 isEmpty( PYTHON_DIR ) {
@@ -36,11 +35,7 @@ equals(PYTHON_VERSION_MAJOR, 2) {
 }
 
 contains(PKGCONFIG, "python.*"){
-# If `pkg-config` is configured, use `qmake PKGCONFIG+=python3.8-embed CONFIG+=...`
-# or `PKGCONFIG+=python2.7m`-like form for older versions,
-# see `pkg-config --list-all | grep python` for details.
-# This can help with GNU/Linux (including macOS with Homebrew), MSYS2/MinGW environment,
-# and also with OpenEmbedded and other cross-builds
+
   CONFIG += link_pkgconfig
   PYTHON_PKGCONFIG = $$member($$unique($$find(PKGCONFIG, "python.*")), 1, 1)
   # add rpath

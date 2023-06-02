@@ -3,6 +3,6 @@
 
 PythonParameter::PythonParameter()
 {
-    this->filename = QCoreApplication::applicationDirPath() + "/statistic.tmp";
+   // this->filename = QCoreApplication::applicationDirPath() + "/statistic.tmp";
 }
 

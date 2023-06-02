@@ -450,7 +450,7 @@ yourCpp = None
 
  \page Building Building
 
- PythonQt requires at least Qt 4.6.1 (for earlier Qt versions, you will need to run the pythonqt_generator, Qt 4.3 is the absolute minimum) and Python 2.6.x/2.7.x or Python 3.3 (or higher).
+
  To compile PythonQt, you will need a python developer installation which includes Python's header files and
 the python2x.[lib | dll | so | dynlib].
  The recommended way to build PythonQt is to use the QMake-based *.pro file.

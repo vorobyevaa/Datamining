@@ -46,22 +46,22 @@ RESOURCES += \
 
 
 
-unix {
-  CONFIG += create_pc create_prl no_install_prl
-  QMAKE_PKGCONFIG_NAME = $${TARGET}
-  QMAKE_PKGCONFIG_DESCRIPTION = Dynamic Python binding for the Qt framework
-  QMAKE_PKGCONFIG_PREFIX = $$INSTALLBASE
-  QMAKE_PKGCONFIG_LIBDIR = $$target.path
-  QMAKE_PKGCONFIG_INCDIR = $$headers.path
-  QMAKE_PKGCONFIG_INCDIR += ${prefix}/include/python3.8
-  QMAKE_PKGCONFIG_VERSION = $$VERSION
+#unix {
+ # CONFIG += create_pc create_prl no_install_prl
+  #QMAKE_PKGCONFIG_NAME = $${TARGET}
+ # QMAKE_PKGCONFIG_DESCRIPTION = Dynamic Python binding for the Qt framework
+ # QMAKE_PKGCONFIG_PREFIX = $$INSTALLBASE
+ # QMAKE_PKGCONFIG_LIBDIR = $$target.path
+ # QMAKE_PKGCONFIG_INCDIR = $$headers.path
+ # QMAKE_PKGCONFIG_INCDIR += ${prefix}/include/python3.8
+ # QMAKE_PKGCONFIG_VERSION = $$VERSION
 
-  INCLUDEPATH += /usr/include/python
-}
+  #INCLUDEPATH += /usr/include/python
+#}
 
-include ( $$PWD/pythonqt/common.prf )
-include ( $$PWD/pythonqt/python.prf )
-include ( $$PWD/pythonqt/PythonQt.prf )
-include ( $$PWD/pythonqt/PythonQt_QtAll.prf )
-include($$PWD/pythonqt/src.pri)
+#include ( $$PWD/pythonqt/common.prf )
+#include ( $$PWD/pythonqt/python.prf )
+#include ( $$PWD/pythonqt/PythonQt.prf )
+#include ( $$PWD/pythonqt/PythonQt_QtAll.prf )
+#include($$PWD/pythonqt/src.pri)
 

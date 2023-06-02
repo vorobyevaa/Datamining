@@ -3,19 +3,20 @@
 #include <QFile>
 #include <QCoreApplication>
 #include <QIODevice>
-#include "gui/PythonQtScriptingConsole.h"
+//#include "gui/PythonQtScriptingConsole.h"
 #include "pythonparameter.h"
+#include <QProcess>
 
 DataMeaningCore :: DataMeaningCore()
 {
-    PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut);
-    mainModule = PythonQt::self()->getMainModule();
+   // PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut);
+    //mainModule = PythonQt::self()->getMainModule();
 }
 
 void DataMeaningCore :: callStatisticPy(QVector <DataRow> dataRows, QList <QByteArray> header)
 {
-    PythonQtScriptingConsole console(NULL, mainModule);
-    PythonQt::self()->registerCPPClass("PythonParameter", "","example", PythonQtCreateObject<PythonParameterWrapper>);
+   // PythonQtScriptingConsole console(NULL, mainModule);
+   // PythonQt::self()->registerCPPClass("PythonParameter", "","example", PythonQtCreateObject<PythonParameterWrapper>);
 
 
     QString content = "";
@@ -36,5 +37,16 @@ void DataMeaningCore :: callStatisticPy(QVector <DataRow> dataRows, QList <QByte
     }
     file.close();
 
-    mainModule.evalFile(QCoreApplication::applicationDirPath() + "/test.py");
+     QProcess pingProcess;
+     QString exec = "python";
+     QStringList params;
+     params.push_back("test.py");
+     params.push_back("statistic.tmp");
+     pingProcess.start(exec, params);
+     pingProcess.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
+     QString output(pingProcess.readAllStandardOutput());
+    qDebug()<<"***********************";
+    qDebug()<<output;
+    qDebug()<<"***********************";
+   // mainModule.evalFile(QCoreApplication::applicationDirPath() + "/test.py");
 }
