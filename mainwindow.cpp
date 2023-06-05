@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->action_import, &QAction::triggered, this, &MainWindow::importFile);
     connect(ptLoadedData, SIGNAL(removeRowSignal(int)), this, SLOT(removeLoadedDataRow(int)));
+    connect(ptStaticticData, SIGNAL(removeRowSignal(int)), this, SLOT(removeStatisticDataRow(int)));
 }
 
 MainWindow::~MainWindow()
@@ -49,4 +50,11 @@ void MainWindow :: removeLoadedDataRow(int index)
 {
     dataMeaning.removeRow(index);
     ptStaticticData->setValues(dataMeaning.statisticMatrix());
+}
+
+void MainWindow :: removeStatisticDataRow(int index)
+{
+     dataMeaning.removeHeader(index);
+     ptLoadedData->setHeader(dataMeaning.fieldsHeader());
+     ptLoadedData->setValues(dataMeaning.loadedMatrix());
 }

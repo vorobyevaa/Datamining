@@ -23,6 +23,33 @@ void DataMeaning::load(QList<QByteArray> content)
     }
 
     dataMeaningCore.callStatisticPy(dataRows, header);
+    qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+    QVector <QVector <QString> > report = dataMeaningCore.report();
+    for (int i = 0; i < report.size(); i++) {
+        for (int j = 0; j < report.size(); j++) {
+            qDebug()<<report[i][j]<<"\t";
+        }
+        qDebug()<<"\n";
+    }
+qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+     statisticValues.resize(header.size());
+    for (int i = 0; i < statisticValues.size(); i++) {
+        statisticValues[i].push_back(((QString)header[i]).trimmed());
+        for (int j = 0; j < report.size(); j++) {
+            qDebug()<<"a  "<<i<<"\t"<<j;
+            if (report[j].size() > i) {
+                qDebug()<<"b";
+            statisticValues[i].push_back(report[j][i].right(report[j][i].size()-((QString)header[i]).trimmed().size()).trimmed());
+            qDebug()<<"c "<<i;
+            }
+            else {
+                qDebug()<<"c "<<i;
+                statisticValues[i].push_back("");
+                qDebug()<<"d";
+            }
+        }
+    }
+    qDebug()<<"--------------------------------------------------------------";
 }
 
 QVector <QVector <QString>>  DataMeaning::loadedMatrix() const
@@ -39,36 +66,8 @@ QVector <QVector <QString>>  DataMeaning::loadedMatrix() const
 
 QVector <QVector <QString>> DataMeaning::statisticMatrix() const
 {
-    QVector <QVector <QString>> result(header.size());
+    return statisticValues;
 
-/*    QMap <QString, QString> types;
-
-    for (int j = 0; j < header.size(); j++) {
-        QMap <QString, int> variants;
-        bool isNumerical = true;
-        for (int i = 0; i < dataRows.size(); i++) {
-            bool ok;
-            int f = dataRows[i].value(header[j]).toFloat(&ok);
-            if (!ok) {
-                isNumerical = false;
-            }
-            if (variants.indexOf(dataRows[i].value(header[j])) >= 0) {
-                variants[dataRows[i].value(header[j])]++;
-            }
-            else {
-                variants[dataRows[i].value(header[j]), 1];
-            }
-        }
-    }
-    */
-
-    for (int i = 0; i < result.size(); i++) {
-        result[i].resize(4);
-        result[i][0] = header[i];
-        result[i][1] = "текст";
-       // result[i][1] =
-    }
-    return result;
 }
 
 int DataMeaning::getFieldsSize() const
@@ -78,11 +77,12 @@ int DataMeaning::getFieldsSize() const
 
 QVector <QString> DataMeaning::fieldsStatisticHeader() const
 {
-    QVector <QString> result(4);
+    QVector <QString> result(5);
     result[0] = "Название";
-    result[1] = "Тип";
-    result[2] = "Максимальный и минимальный";
-    result[3] = "Варианты";
+    result[1] = "Максимум";
+    result[2] = "Минимум";
+    result[3] = "Тип";
+    result[4] = "Варианты";
     return result;
 }
 
@@ -99,4 +99,10 @@ void DataMeaning :: removeRow(int index)
 {
     dataRows.remove(index);
     dataMeaningCore.callStatisticPy(dataRows, header);
+}
+
+void DataMeaning :: removeHeader(int index)
+{
+    QString key = header[index];
+    header.removeAt(index);
 }

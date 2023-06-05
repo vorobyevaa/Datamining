@@ -9,8 +9,9 @@ class DataMeaningCore
 public:
     DataMeaningCore();
     void callStatisticPy(QVector <DataRow> dataRows, QList <QByteArray> header);
+    QVector <QVector <QString> > report();
 private:
-    //PythonQtObjectPtr mainModule;
+    QVector <QVector <QString> > reportValues;
 };
 
 #endif // DATAMEANINGCORE_H

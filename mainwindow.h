@@ -21,7 +21,7 @@ public:
 private slots:
     void importFile();
     void removeLoadedDataRow(int index);
-
+    void removeStatisticDataRow(int index);
 private:
     Ui::MainWindow *ui;
     Ptable * ptLoadedData;
@@ -32,3 +32,4 @@ private:
     DataMeaning dataMeaning;
 };
 #endif // MAINWINDOW_H
+
