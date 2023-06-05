@@ -8,7 +8,8 @@ class DataMeaningCore
 {
 public:
     DataMeaningCore();
-    void callStatisticPy(QVector <DataRow> dataRows, QList <QByteArray> header);
+    void callStatisticPy(QVector <DataRow> dataRows, QList <QByteArray> header, QString scriptname);
+    void callStatisticPy(QVector <DataRow> dataRows, QString header, QString scriptname);
     QVector <QVector <QString> > report();
 private:
     QVector <QVector <QString> > reportValues;

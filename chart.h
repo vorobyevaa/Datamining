@@ -10,6 +10,7 @@ public:
     Chart(QWidget * parent, QString caption = "");
     void createChart(QVector <double> values, QVector <double> second, QVector <double> bords, double a);
 
+    void createChart(QVector <QVector <QPair <double, double > > > values, int index);
     void createChart(QVector <QVector <QPair <double, double > > > values);
     void setTitle(QString title);
 
@@ -18,6 +19,8 @@ private:
     QString m_caption;
 
     QChart *chart;
+
+    int type;
 };
 
 #endif // CHART_H

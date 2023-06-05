@@ -14,11 +14,14 @@ public:
     void load(QList<QByteArray> content);
     QVector <QVector <QString>> loadedMatrix() const;
     QVector <QVector <QString>> statisticMatrix() const;
+    QVector <QString> values(QString field);
     int getFieldsSize() const;
     QVector <QString> fieldsHeader() const;
     QVector <QString> fieldsStatisticHeader() const;
     void removeRow(int index);
     void removeHeader(int index);
+
+    void prepareToPredict(int fieldIndex);
 private:
     QVector <DataRow> dataRows;
     QList <QByteArray> header;

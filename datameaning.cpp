@@ -21,9 +21,9 @@ void DataMeaning::load(QList<QByteArray> content)
             }
         }
     }
-
-    dataMeaningCore.callStatisticPy(dataRows, header);
-    qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+//qDebug()<<"rows = "<<dataRows.size();
+    dataMeaningCore.callStatisticPy(dataRows, header, "statistic");
+   // qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
     QVector <QVector <QString> > report = dataMeaningCore.report();
     for (int i = 0; i < report.size(); i++) {
         for (int j = 0; j < report.size(); j++) {
@@ -31,25 +31,25 @@ void DataMeaning::load(QList<QByteArray> content)
         }
         qDebug()<<"\n";
     }
-qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+//qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
      statisticValues.resize(header.size());
     for (int i = 0; i < statisticValues.size(); i++) {
         statisticValues[i].push_back(((QString)header[i]).trimmed());
         for (int j = 0; j < report.size(); j++) {
             qDebug()<<"a  "<<i<<"\t"<<j;
             if (report[j].size() > i) {
-                qDebug()<<"b";
+           //     qDebug()<<"b";
             statisticValues[i].push_back(report[j][i].right(report[j][i].size()-((QString)header[i]).trimmed().size()).trimmed());
-            qDebug()<<"c "<<i;
+           // qDebug()<<"c "<<i;
             }
             else {
-                qDebug()<<"c "<<i;
+            //    qDebug()<<"c "<<i;
                 statisticValues[i].push_back("");
-                qDebug()<<"d";
+           //     qDebug()<<"d";
             }
         }
     }
-    qDebug()<<"--------------------------------------------------------------";
+   // qDebug()<<"--------------------------------------------------------------";
 }
 
 QVector <QVector <QString>>  DataMeaning::loadedMatrix() const
@@ -66,6 +66,7 @@ QVector <QVector <QString>>  DataMeaning::loadedMatrix() const
 
 QVector <QVector <QString>> DataMeaning::statisticMatrix() const
 {
+    qDebug()<<statisticValues;
     return statisticValues;
 
 }
@@ -98,11 +99,26 @@ QVector <QString> DataMeaning :: fieldsHeader() const
 void DataMeaning :: removeRow(int index)
 {
     dataRows.remove(index);
-    dataMeaningCore.callStatisticPy(dataRows, header);
+    dataMeaningCore.callStatisticPy(dataRows, header, "statistic");
 }
 
 void DataMeaning :: removeHeader(int index)
 {
     QString key = header[index];
     header.removeAt(index);
+}
+
+QVector <QString> DataMeaning :: values(QString field)
+{
+    QVector <QString> result(dataRows.size());
+    for (int i = 0; i < dataRows.size(); i++) {
+        result[i] = dataRows[i].value(field);
+    }
+    return result;
+}
+
+void DataMeaning :: prepareToPredict(int fieldIndex)
+{
+        qDebug()<<fieldIndex<<"\t"<<(QString)header[fieldIndex];
+    dataMeaningCore.callStatisticPy(dataRows, (QString)header[fieldIndex], "predict");
 }

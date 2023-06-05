@@ -5,6 +5,12 @@
 using namespace QtCharts;
 #include <QBarSet>
 
+void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, int index)
+{
+    this->type = index;
+    createChart(values);
+}
+
 void Chart :: createChart(QVector <QVector <QPair <double, double > > > values)
 {
     chart = new QChart();
@@ -12,7 +18,15 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values)
     chart->removeAllSeries();
     for (int k = 0; k < values.size(); k++)
     {
-       QLineSeries *series = new QLineSeries();
+       QLineSeries *series;
+       switch (type) {
+       case 0:
+           series = new QLineSeries();
+           break;
+       case 1:
+           series = new QSplineSeries();
+           break;
+       }
      // series->setUseOpenGL(true);
        series->setName(" " + QString::number(k));
        for (int i = 0; i < values[k].size(); i++)

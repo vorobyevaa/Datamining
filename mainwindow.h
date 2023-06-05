@@ -18,17 +18,22 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private:
+    void loadChartSelectors();
+
 private slots:
     void importFile();
     void removeLoadedDataRow(int index);
     void removeStatisticDataRow(int index);
+    void buildChart();
+    void selectSecondDataColumn(int index);
 private:
     Ui::MainWindow *ui;
     Ptable * ptLoadedData;
     Ptable * ptStaticticData;
     Chart * chChart;
-
-
+    Ptable * ptSecondData;
+    Chart * chSecondChart;
     DataMeaning dataMeaning;
 };
 #endif // MAINWINDOW_H
