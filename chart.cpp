@@ -5,20 +5,21 @@
 using namespace QtCharts;
 #include <QBarSet>
 
-void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, int index)
+void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, int index, QString color)
 {
     this->type = index;
-    createChart(values);
+    qDebug()<<color;
+    createChart(values, "gold");
 }
 
-void Chart :: createChart(QVector <QVector <QPair <double, double > > > values)
+void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, QString color)
 {
     chart = new QChart();
     chart->legend()->hide();
     chart->removeAllSeries();
     for (int k = 0; k < values.size(); k++)
     {
-       QLineSeries *series;
+       QXYSeries *series;
        switch (type) {
        case 0:
            series = new QLineSeries();
@@ -26,8 +27,12 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values)
        case 1:
            series = new QSplineSeries();
            break;
+       case 2:
+           series = new QScatterSeries();
+            break;
        }
      // series->setUseOpenGL(true);
+       series->setColor(QColor(color));
        series->setName(" " + QString::number(k));
        for (int i = 0; i < values[k].size(); i++)
        {

@@ -87,7 +87,7 @@ void MainWindow :: buildChart()
         values[0][i] = qMakePair(x[i].toDouble(), y[i].toDouble());
     }
 
-    this->chChart->createChart(values, ui->cb_plot->currentIndex());
+    this->chChart->createChart(values, ui->cb_plot->currentIndex(), ui->cb_color->currentText());
 }
 
 void MainWindow :: selectSecondDataColumn(int index)

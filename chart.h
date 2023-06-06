@@ -10,8 +10,8 @@ public:
     Chart(QWidget * parent, QString caption = "");
     void createChart(QVector <double> values, QVector <double> second, QVector <double> bords, double a);
 
-    void createChart(QVector <QVector <QPair <double, double > > > values, int index);
-    void createChart(QVector <QVector <QPair <double, double > > > values);
+    void createChart(QVector <QVector <QPair <double, double > > > values, int index, QString color);
+    void createChart(QVector <QVector <QPair <double, double > > > values, QString color);
     void setTitle(QString title);
 
 private:
