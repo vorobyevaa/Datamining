@@ -16,25 +16,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    about.cpp \
     datameaning.cpp \
     datameaningcore.cpp \
     datarow.cpp \
     main.cpp \
     mainwindow.cpp ptable.cpp chart.cpp \
-    pythonparameter.cpp
+    support.cpp
 
 HEADERS += \
+    about.h \
     datameaning.h \
     datameaningcore.h \
     datarow.h \
     mainwindow.h ptable.h chart.h \
-    pythonparameter.h
+    support.h
 
 FORMS += \
+    about.ui \
+    help.ui \
     mainwindow.ui
 
 OBJECTS_DIR = obj
 MOC_DIR = moc
+UI_DIR = moc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -8,8 +8,11 @@ using namespace QtCharts;
 void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, int index, QString color)
 {
     this->type = index;
-    qDebug()<<color;
-    createChart(values, "gold");
+    QMap <QString, QString> colors;
+    colors["красный"] = "red";
+    colors["синий"] = "blue";
+    colors["цвет госпожи лапули"] = "gold";
+    createChart(values, colors[color]);
 }
 
 void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, QString color)

@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "about.h"
+#include "support.h"
 #include "ui_mainwindow.h"
 #include <QPair>
 
@@ -13,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent)
     chChart = new Chart(ui->frame_chart);
 
     connect(ui->action_import, &QAction::triggered, this, &MainWindow::importFile);
+    connect(ui->action_support, &QAction::triggered, this, &MainWindow::support);
+    connect(ui->action_about, &QAction::triggered, this, &MainWindow::about);
+
     connect(ptLoadedData, SIGNAL(removeRowSignal(int)), this, SLOT(removeLoadedDataRow(int)));
     connect(ptStaticticData, SIGNAL(removeRowSignal(int)), this, SLOT(removeStatisticDataRow(int)));
     connect(ptStaticticData, SIGNAL(removeRowSignal(int)), this, SLOT(removeStatisticDataRow(int)));
@@ -108,4 +113,16 @@ void MainWindow :: loadChartSelectors() {
     for (int i = 0; i < header.size(); i++) fieldLists.append(header[i]);
     ui->cb_valuex->addItems(fieldLists);
     ui->cb_valuey->addItems(fieldLists);
+}
+
+void MainWindow :: about()
+{
+    About about;
+    about.exec();
+}
+
+void MainWindow :: support()
+{
+    Support support;
+    support.exec();
 }
