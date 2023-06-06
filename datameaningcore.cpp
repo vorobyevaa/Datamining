@@ -4,7 +4,6 @@
 #include <QCoreApplication>
 #include <QIODevice>
 //#include "gui/PythonQtScriptingConsole.h"
-#include "pythonparameter.h"
 #include <QProcess>
 
 DataMeaningCore :: DataMeaningCore()
