@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     ptSecondData = new Ptable(ui->frame_table_2);
     chSecondChart = new Chart(ui->frame_second_chart);
     connect(ptSecondData->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(selectSecondDataColumn(int)));
-    ui->gb_predict->hide();
+  //  ui->gb_predict->hide();
 }
 
 MainWindow::~MainWindow()
@@ -92,18 +92,18 @@ void MainWindow :: buildChart()
         values[0][i] = qMakePair(x[i].toDouble(), y[i].toDouble());
     }
 
-    this->chChart->createChart(values, ui->cb_plot->currentIndex(), ui->cb_color->currentText());
+    this->chChart->createChart(values, ui->cb_plot->currentIndex(), ui->cb_color->currentText(), ui->cb_bcolor->currentText());
 }
 
 void MainWindow :: selectSecondDataColumn(int index)
 {
     qDebug()<<index;
-    ui->cb_select_target_4->setChecked(true);
-    ptSecondData->setDisabled(true);
+  //  ui->cb_select_target_4->setChecked(true);
+  //  ptSecondData->setDisabled(true);
 
     dataMeaning.prepareToPredict(index-1);
-    ui->gb_predict->show();
-    ui->frame_table_2->hide();
+   // ui->gb_predict->show();
+  //  ui->frame_table_2->hide();
 
 }
 

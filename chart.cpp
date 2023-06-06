@@ -5,19 +5,20 @@
 using namespace QtCharts;
 #include <QBarSet>
 
-void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, int index, QString color)
+void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, int index, QString color, QString bcolor)
 {
     this->type = index;
     QMap <QString, QString> colors;
     colors["красный"] = "red";
     colors["синий"] = "blue";
     colors["цвет госпожи лапули"] = "gold";
-    createChart(values, colors[color]);
+    createChart(values, colors[color], colors[bcolor]);
 }
 
-void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, QString color)
+void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, QString color, QString bcolor)
 {
     chart = new QChart();
+    chart->setBackgroundBrush(QBrush(QColor(bcolor)));
     chart->legend()->hide();
     chart->removeAllSeries();
     for (int k = 0; k < values.size(); k++)

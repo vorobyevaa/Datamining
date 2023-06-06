@@ -4,10 +4,11 @@
 #include <QMessageBox>
 
 Ptable :: Ptable(QWidget * owner) : QTableWidget(owner) {
-    this->setColumnCount(3);
-    this->setRowCount(10);
-    this->resize(500,500);
+    this->setColumnCount(0);
+    this->setRowCount(0);
+    this->resize(owner->size());
 
+    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     // формируем столбцы
     QString captions[] = {"", "", ""};
     for (int i = 0; i < 3; i++) {
