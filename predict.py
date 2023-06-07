@@ -1,7 +1,12 @@
 import sys
+import pandas as pd
 
 if (len(sys.argv) == 2):
-    print("hist")
+    data=pd.read_csv(sys.argv[1])
+    
+    cnt=data.value_counts()
+    print("count")
+    print(cnt)
 else:
     print("predict")
     model= {"name":[1,2,3],"age":[2,8,7]}

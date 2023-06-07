@@ -23,15 +23,15 @@ void DataMeaning::load(QList<QByteArray> content)
     }
 //qDebug()<<"rows = "<<dataRows.size();
     dataMeaningCore.callStatisticPy(dataRows, header, "statistic");
-   // qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+    qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
     QVector <QVector <QString> > report = dataMeaningCore.report();
     for (int i = 0; i < report.size(); i++) {
-        for (int j = 0; j < report.size(); j++) {
-            qDebug()<<report[i][j]<<"\t";
+        for (int j = 0; j < report[i].size(); j++) {
+            qDebug()<<i<<"\t"<<j<<"\t"<<report[i][j]<<"\t";
         }
         qDebug()<<"\n";
     }
-//qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
      statisticValues.resize(header.size());
     for (int i = 0; i < statisticValues.size(); i++) {
         statisticValues[i].push_back(((QString)header[i]).trimmed());
@@ -78,12 +78,18 @@ int DataMeaning::getFieldsSize() const
 
 QVector <QString> DataMeaning::fieldsStatisticHeader() const
 {
-    QVector <QString> result(5);
+    QVector <QString> result(11);
     result[0] = "Название";
     result[1] = "Максимум";
     result[2] = "Минимум";
     result[3] = "Тип";
     result[4] = "Варианты";
+    result[5] = "Название";
+    result[6] = "Максимум";
+    result[7] = "Минимум";
+    result[8] = "Тип";
+    result[9] = "Варианты";
+    result[10] = "Варианты";
     return result;
 }
 
