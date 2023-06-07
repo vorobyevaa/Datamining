@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->action_import, &QAction::triggered, this, &MainWindow::importFile);
     connect(ui->action_support, &QAction::triggered, this, &MainWindow::support);
     connect(ui->action_about, &QAction::triggered, this, &MainWindow::about);
+    connect(ui->action_exit, &QAction::triggered, this, &MainWindow::exit);
 
     connect(ptLoadedData, SIGNAL(removeRowSignal(int)), this, SLOT(removeLoadedDataRow(int)));
     connect(ptStaticticData, SIGNAL(removeRowSignal(int)), this, SLOT(removeStatisticDataRow(int)));
@@ -60,7 +61,7 @@ void MainWindow::importFile()
 
         ptSecondData->setHeader(dataMeaning.fieldsHeader());
         ptSecondData->setValues(dataMeaning.loadedMatrix());
-        ui->cb_load_4->setChecked(true);
+   //     ui->cb_load_4->setChecked(true);
     }
 }
 
@@ -125,4 +126,8 @@ void MainWindow :: support()
 {
     Support support;
     support.exec();
+}
+
+void MainWindow::exit() {
+    QApplication::quit();
 }

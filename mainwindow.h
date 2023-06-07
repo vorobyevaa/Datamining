@@ -25,6 +25,7 @@ private slots:
     void importFile();
     void about();
     void support();
+    void exit();
     void removeLoadedDataRow(int index);
     void removeStatisticDataRow(int index);
     void buildChart();
