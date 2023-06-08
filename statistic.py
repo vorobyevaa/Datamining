@@ -6,6 +6,19 @@ data=pd.read_csv(sys.argv[1])
 #count rows
 rows=len(data.axes[1])
 
+
+typ=data.dtypes
+#for i in range(0,rows,1):
+#    if typ[i]=='int64':
+#        typ[i]='Целые'
+#    elif typ[i]=='float64':
+#        typ[i]='Дробные' 
+#    elif typ[i]=='object':
+#        typ[i]='Символьные'    
+
+print(typ)
+print("\n\n");
+
 ct=data.count()
 print(ct)
 print("\n\n");
@@ -19,17 +32,6 @@ print(manim)
 print("\n\n");
 
 
-typ=data.dtypes
-for i in range(0,rows,1):
-    if typ[i]=='int64':
-        typ[i]='Целые'
-    elif typ[i]=='float64':
-        typ[i]='Дробные' 
-    elif typ[i]=='object':
-        typ[i]='Символьные'    
-
-print(typ)
-print("\n\n");
 
 
 #s=data['Второй столбец'].value_counts()

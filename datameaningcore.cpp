@@ -15,12 +15,12 @@ DataMeaningCore :: DataMeaningCore()
 void DataMeaningCore :: callStatisticPy(QVector <DataRow> dataRows, QString header, QString scriptname)
 {
     qDebug()<<"header = "<<header<<"\t"<<scriptname;
-    QList <QByteArray> bHeader;
-    bHeader.push_back(header.toUtf8());
+    Array bHeader;
+    bHeader.push_back(header);
     callStatisticPy(dataRows, bHeader, scriptname);
 }
 
-void DataMeaningCore :: callStatisticPy(QVector <DataRow> dataRows, QList <QByteArray> header, QString scriptname)
+void DataMeaningCore :: callStatisticPy(QVector <DataRow> dataRows, Array header, QString scriptname)
 {
    // PythonQtScriptingConsole console(NULL, mainModule);
    // PythonQt::self()->registerCPPClass("PythonParameter", "","example", PythonQtCreateObject<PythonParameterWrapper>);
@@ -66,7 +66,7 @@ qDebug()<<"rows = "<<dataRows.size();
 
     reportValues.clear();
     for (int i = 0; i < outputList.size(); i++) {
-        QVector <QString> rep;
+        Array rep;
         QStringList sl = outputList[i].split("\n");
 
       //  qDebug()<<sl.size();
@@ -80,7 +80,7 @@ qDebug()<<"rows = "<<dataRows.size();
 }
 
 
-QVector <QVector <QString> > DataMeaningCore :: report()
+QVector <Array> DataMeaningCore :: report()
 {
     return reportValues;
 }

@@ -6,7 +6,7 @@ DataRow::DataRow()
 
 }
 
-DataRow::DataRow(QString content, QList <QByteArray> header)
+DataRow::DataRow(QString content, Array header)
 {
     QStringList values = content.split(',');
     for (int i = 0; i < values.size(); i++) {

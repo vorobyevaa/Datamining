@@ -106,15 +106,17 @@ void MainWindow :: buildChart()
     qDebug()<<ui->cb_valuex->currentIndex()<<"\t"<<ui->cb_valuey->currentIndex();
     QVector <QString> header = dataMeaning.fieldsHeader();
 
-    QVector <QString> x = dataMeaning.values(header[ui->cb_valuex->currentIndex()]);
-    QVector <QString> y = dataMeaning.values(header[ui->cb_valuey->currentIndex()]);
+    QVector <QString> x = dataMeaning.values(header[ui->cb_valuex->currentIndex()], dataMeaning.isSymbolHeaderField(ui->cb_valuex->currentIndex()));
+    QVector <QString> y = dataMeaning.values(header[ui->cb_valuey->currentIndex()], dataMeaning.isSymbolHeaderField(ui->cb_valuey->currentIndex()));
 
     QVector <QVector <QPair <double, double> > > values(1);
     values[0].resize(x.size());
+
     for (int i = 0; i < x.size(); i++) {
         values[0][i] = qMakePair(x[i].toDouble(), y[i].toDouble());
     }
 
+    qDebug()<<values;
     this->chChart->createChart(values, ui->cb_plot->currentIndex(), ui->cb_color->currentText(), ui->cb_bcolor->currentText());
 }
 
