@@ -21,6 +21,20 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, 
     chart->setBackgroundBrush(QBrush(QColor(bcolor)));
     chart->legend()->hide();
     chart->removeAllSeries();
+
+
+  QAbstractAxis * axisX = new QValueAxis();
+   axisX->setTitleText(m_caption.first);
+     //  axisX.setRange(0, 30)
+       //axisX.setLabelFormat("%.1f")
+    //   axisX.setTickCount(7)
+
+   QAbstractAxis * axisY = new QValueAxis();
+           axisY->setTitleText(m_caption.second);
+     //  axisY.setRange(0, 100)
+     //  axisY.setLabelFormat("%d")
+     ////  axisY.setMinorTickCount(5)
+
     for (int k = 0; k < values.size(); k++)
     {
        QXYSeries *series;
@@ -35,6 +49,8 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, 
            series = new QScatterSeries();
             break;
        }
+
+
      // series->setUseOpenGL(true);
        series->setColor(QColor(color));
        series->setName(" " + QString::number(k));
@@ -43,25 +59,32 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, 
          series->append(values[k][i].first, values[k][i].second);
        }
        chart->addSeries(series);
+
+     //  series->attachAxis(axisX);
+       //     series->attachAxis(axisY);
     }
 
     chart->createDefaultAxes();
-    chart->setTitle(m_caption);
 
     QChartView *chartView = new QChartView(chart, m_parent);
     chartView->setGeometry(0,0,m_parent->size().width(),m_parent->size().height());
     chartView->setRenderHint(QPainter::Antialiasing);
+
+  // chart->addAxis(axisX, Qt::AlignLeft);
+    //   chart->addAxis(axisY, Qt::AlignLeft);
+//
     chartView->show();
 }
 
-void Chart :: setTitle(QString title)
+void Chart :: setTitle(QString title, QPair <QString, QString> caption)
 {
     chart->setTitle(title);
+    m_caption = caption;
 }
 
 void Chart :: createChart(QVector <double> values, QVector <double> second, QVector <double> bords, double a)
 {
-    QBarSet *set0 = new QBarSet((m_caption == "") ? "Распределение сгенерированных чисел" : m_caption);
+    QBarSet *set0 = new QBarSet("");//(m_caption == "") ? "Распределение сгенерированных чисел" : m_caption);
     QBarSet *set1 = new QBarSet("Заданные вероятности");
 
     // максимальное значение (для выставления высоты графика)
@@ -117,8 +140,7 @@ void Chart :: createChart(QVector <double> values, QVector <double> second, QVec
     chartView->show();
 }
 
-Chart :: Chart(QWidget * parent, QString caption)
+Chart :: Chart(QWidget * parent)
 {
     m_parent = parent;
-    m_caption = caption;
 }
