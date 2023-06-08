@@ -140,6 +140,9 @@ void MainWindow :: loadChartSelectors() {
     QStringList fieldLists;
     QVector <QString> header = dataMeaning.fieldsHeader();
     for (int i = 0; i < header.size(); i++) fieldLists.append(header[i]);
+    ui->cb_valuex->clear();
+    ui->cb_valuey->clear();
+
     ui->cb_valuex->addItems(fieldLists);
     ui->cb_valuey->addItems(fieldLists);
 }
