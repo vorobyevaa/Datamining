@@ -82,53 +82,41 @@ void Chart :: setTitle(QString title, QPair <QString, QString> caption)
     m_caption = caption;
 }
 
-void Chart :: createChart(QVector <double> values, QVector <double> second, QVector <double> bords, double a)
+void Chart :: createChart(QVector <double> values, QVector <QString> x, QString title)
 {
-    QBarSet *set0 = new QBarSet("");//(m_caption == "") ? "Распределение сгенерированных чисел" : m_caption);
-    QBarSet *set1 = new QBarSet("Заданные вероятности");
+    QBarSet *set1 = new QBarSet(title);
 
     // максимальное значение (для выставления высоты графика)
     double max = 0;
     for (int i = 0; i < values.size(); i++) {
-        *set0 << values[i];
+        *set1 << values[i];
         double pm = values[i];//ui->tableWidget->item(i, 1)->text().toDouble();
-        if (second.size() > 0) {
-            if (second[i] > values[i]) pm = second[i];
-            *set1 << second[i];
-        }
         max = (max <pm) ? pm : max;
     }
 
     QBarSeries *series = new QBarSeries();
-    series->append(set0);
-
-    QBarSeries *series1 = new QBarSeries();
-    if (second.size() > 0)
-    {
-        series1->append(set1);
-    }
+    series->append(set1);
 
     chart = new QChart();
     chart->addSeries(series);
-    if (second.size() > 0) chart->addSeries(series1);
+
     chart->setTitle("Гистограммы распределения");
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QStringList categories;
     for (int i = 0; i < values.size(); i++) {
-        categories <<  ("("+QString::number((i == 0) ? a : bords[i-1]) + "; " + QString::number(bords[i])+"]");
+        categories <<  x[i];
     }
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
     axisX->append(categories);
     chart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
-    if (second.size() > 0) series1->attachAxis(axisX);
+
 
     QValueAxis *axisY = new QValueAxis();
     axisY->setRange(0,max*1.1);
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
-    if (second.size() > 0) series1->attachAxis(axisY);
 
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignBottom);

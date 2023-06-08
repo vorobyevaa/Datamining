@@ -68,6 +68,8 @@ qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         }
     }
    // qDebug()<<"--------------------------------------------------------------";
+
+    m_dataMeaningCore.callStatisticPy(m_dataRows, m_header, "statistic");
 }
 
 QVector <Array>  DataMeaning::loadedMatrix() const
@@ -132,23 +134,29 @@ void DataMeaning :: removeHeader(int index)
     m_header.removeAt(index);
 }
 
+QMap <QString, int> DataMeaning :: fieldKeys(QString field)
+{
+    int index = 0;
+    QMap <QString, int> keys;
+    for (int i = 0; i < m_dataRows.size(); i++)
+    {
+        if (!keys.contains(m_dataRows[i].value(field)))
+        {
+            keys[m_dataRows[i].value(field)] = index;
+            index++;
+        }
+    }
+    return keys;
+}
+
 Array DataMeaning :: values(QString field, bool isToNum)
 {
     Array result(m_dataRows.size());
     if (isToNum)
     {
-        int index = 0;
-        QMap <QString, int> keys;
-        for (int i = 0; i < m_dataRows.size(); i++)
-        {
-            if (!keys.contains(m_dataRows[i].value(field)))
-            {
-                keys[m_dataRows[i].value(field)] = index;
-                index++;
-            }
-        }
-               qDebug()<<"keys";
-       qDebug()<<keys;
+
+        QMap <QString, int> keys = fieldKeys(field);
+        qDebug()<<keys;
         for (int i = 0; i < m_dataRows.size(); i++)
         {
             result[i] = QString::number(keys[m_dataRows[i].value(field)]);
@@ -168,10 +176,29 @@ Array DataMeaning :: values(QString field, bool isToNum)
     return result;
 }
 
-void DataMeaning :: prepareToPredict(int fieldIndex)
+QPair <QVector <double>, QVector <QString> > DataMeaning :: prepareToPredict(int fieldIndex)
 {
-        qDebug()<<fieldIndex<<"\t"<<(QString)m_header[fieldIndex];
-    m_dataMeaningCore.callStatisticPy(m_dataRows, (QString)m_header[fieldIndex], "predict");
+    //    qDebug()<<fieldIndex<<"\t"<<(QString)m_header[fieldIndex];
+    m_dataMeaningCore.callStatisticPy(m_dataRows, m_header[fieldIndex], "predict");
+    qDebug()<<"******************************+++++++++++++++++++++++++++++++++++++";
+    QVector <Array> report = m_dataMeaningCore.report();
+
+     qDebug()<<report[0]<<"=================";
+     QMap <QString, int> keys = fieldKeys(m_header[fieldIndex]);
+     QVector <double> y;
+     QVector <QString> x;
+     for (int i = 1; i < report[0].size(); i++)
+     {
+         int delimIndex = report[0][i].lastIndexOf(' ');
+         qDebug()<<report[0][i].left(delimIndex).trimmed()<<" = "<<report[0][i].right(report[0][i].size() - delimIndex).trimmed();
+         if (!report[0][i].left(delimIndex).trimmed().isEmpty())
+         {
+             x.push_back(report[0][i].left(delimIndex).trimmed());
+             y.push_back(report[0][i].right(report[0][i].size() - delimIndex).trimmed().toDouble());
+         }
+     }
+    return QPair <QVector <double>, QVector <QString> > (y, x);
+
 }
 
 bool DataMeaning :: isSymbolHeaderField(int fieldIndex)

@@ -21,8 +21,9 @@ public:
     Array fieldsStatisticHeader() const;
     void removeRow(int index);
     void removeHeader(int index);
-    void prepareToPredict(int fieldIndex);
+    QPair <QVector <double>, QVector <QString> > prepareToPredict(int fieldIndex);
     bool isSymbolHeaderField(int fieldIndex);
+    QMap <QString, int> fieldKeys(QString field) ;
 private:
     QVector <DataRow> m_dataRows;
     Array m_header;

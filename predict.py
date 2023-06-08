@@ -5,8 +5,7 @@ if (len(sys.argv) == 2):
     data=pd.read_csv(sys.argv[1])
     
     cnt=data.value_counts()
-    print("count")
-    print(cnt)
+    print(cnt.to_string())
 else:
     print("predict")
     model= {"name":[1,2,3],"age":[2,8,7]}

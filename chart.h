@@ -8,8 +8,7 @@
 class Chart {
 public:
     Chart(QWidget * parent);
-    void createChart(QVector <double> values, QVector <double> second, QVector <double> bords, double a);
-
+    void createChart(QVector <double> values, QVector <QString> x, QString title);
     void createChart(QVector <QVector <QPair <double, double > > > values, int index, QString color, QString bcolor);
     void createChart(QVector <QVector <QPair <double, double > > > values, QString color, QString bcolor);
     void setTitle(QString title, QPair <QString, QString> caption);

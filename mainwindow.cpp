@@ -126,7 +126,9 @@ void MainWindow :: selectSecondDataColumn(int index)
   //  ui->cb_select_target_4->setChecked(true);
   //  ptSecondData->setDisabled(true);
 
-    dataMeaning.prepareToPredict(index-1);
+    QPair <QVector <double>, QVector <QString> > chartValues = dataMeaning.prepareToPredict(index-1);
+    qDebug()<<chartValues;
+    chSecondChart->createChart(chartValues.first, chartValues.second, dataMeaning.fieldsHeader()[index-1]);
    // ui->gb_predict->show();
   //  ui->frame_table_2->hide();
 
