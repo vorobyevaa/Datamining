@@ -18,7 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->action_save, &QAction::triggered, this, &MainWindow::saveStatistic);
     connect(ui->action_support, &QAction::triggered, this, &MainWindow::support);
     connect(ui->action_about, &QAction::triggered, this, &MainWindow::about);
+    connect(ui->action_doc, &QAction::triggered, this, &MainWindow::doc);
     connect(ui->action_exit, &QAction::triggered, this, &MainWindow::exit);
+
 
     connect(ptLoadedData, SIGNAL(removeRowSignal(int)), this, SLOT(removeLoadedDataRow(int)));
     connect(ptStaticticData, SIGNAL(removeRowSignal(int)), this, SLOT(removeStatisticDataRow(int)));
@@ -140,6 +142,12 @@ void MainWindow :: loadChartSelectors() {
     for (int i = 0; i < header.size(); i++) fieldLists.append(header[i]);
     ui->cb_valuex->addItems(fieldLists);
     ui->cb_valuey->addItems(fieldLists);
+}
+
+void MainWindow :: doc()
+{
+    QUrl url = QUrl::fromLocalFile (QCoreApplication::applicationDirPath() + "/doc.odt");
+    bool result = QDesktopServices::openUrl (url);
 }
 
 void MainWindow :: about()

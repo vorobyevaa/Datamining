@@ -64,6 +64,9 @@ void Ptable :: setHeader(Array header)
         twiBord->setText(header[i]);
         this->setHorizontalHeaderItem(i+1,twiBord);
     }
+    QTableWidgetItem *twiBord = new QTableWidgetItem();
+    twiBord->setText("");
+    this->setHorizontalHeaderItem(0,twiBord);
 }
 
 void Ptable :: _createRow(int rowIndex)

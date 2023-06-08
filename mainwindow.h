@@ -26,6 +26,7 @@ private slots:
     void saveStatistic();
     void about();
     void support();
+    void doc();
     void exit();
     void removeLoadedDataRow(int index);
     void removeStatisticDataRow(int index);
