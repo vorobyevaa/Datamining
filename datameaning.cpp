@@ -52,9 +52,9 @@ qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    // qDebug()<<"--------------------------------------------------------------";
 }
 
-QVector <QVector <QString>>  DataMeaning::loadedMatrix() const
+QVector <Array>  DataMeaning::loadedMatrix() const
 {
-    QVector <QVector <QString>> result (dataRows.size());
+    QVector <Array> result (dataRows.size());
     for (int i = 0; i < result.size(); i++) {
         for (int j = 0; j < header.size(); j++) {
             result[i].resize(header.size());
@@ -64,7 +64,7 @@ QVector <QVector <QString>>  DataMeaning::loadedMatrix() const
     return result;
 }
 
-QVector <QVector <QString>> DataMeaning::statisticMatrix() const
+QVector <Array> DataMeaning::statisticMatrix() const
 {
     qDebug()<<statisticValues;
     return statisticValues;
@@ -76,9 +76,9 @@ int DataMeaning::getFieldsSize() const
     return header.size();
 }
 
-QVector <QString> DataMeaning::fieldsStatisticHeader() const
+Array DataMeaning::fieldsStatisticHeader() const
 {
-    QVector <QString> result(11);
+    Array result(11);
     result[0] = "Название";
     result[1] = "Максимум";
     result[2] = "Минимум";
@@ -93,9 +93,9 @@ QVector <QString> DataMeaning::fieldsStatisticHeader() const
     return result;
 }
 
-QVector <QString> DataMeaning :: fieldsHeader() const
+Array DataMeaning :: fieldsHeader() const
 {
-    QVector <QString> result(header.size());
+    Array result(header.size());
     for (int i = 0; i < result.size(); i++) {
         result[i] = header[i];
     }
@@ -114,9 +114,9 @@ void DataMeaning :: removeHeader(int index)
     header.removeAt(index);
 }
 
-QVector <QString> DataMeaning :: values(QString field)
+Array DataMeaning :: values(QString field)
 {
-    QVector <QString> result(dataRows.size());
+    Array result(dataRows.size());
     for (int i = 0; i < dataRows.size(); i++) {
         result[i] = dataRows[i].value(field);
     }

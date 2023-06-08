@@ -2,14 +2,15 @@
 #define PTABLE_H
 
 #include <QTableWidget>
+#include "array.h"
 
 class Ptable : public QTableWidget
 {
     Q_OBJECT
 public:
     Ptable(QWidget * owner = 0);
-    void setValues(QVector <QVector <QString> > values);
-    void setHeader(QVector <QString> header);
+    void setValues(QVector <Array> values);
+    void setHeader(Array header);
     bool checkValues(bool showMessageFlag);
     QVector <QPair <double, double> > values() const;
     QVector <QVector <double> > allValues() const;

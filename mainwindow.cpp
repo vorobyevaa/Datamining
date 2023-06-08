@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     chChart = new Chart(ui->frame_chart);
 
     connect(ui->action_import, &QAction::triggered, this, &MainWindow::importFile);
+    connect(ui->action_save, &QAction::triggered, this, &MainWindow::saveStatistic);
     connect(ui->action_support, &QAction::triggered, this, &MainWindow::support);
     connect(ui->action_about, &QAction::triggered, this, &MainWindow::about);
     connect(ui->action_exit, &QAction::triggered, this, &MainWindow::exit);
@@ -65,6 +66,27 @@ void MainWindow::importFile()
     }
 }
 
+void MainWindow :: saveStatistic()
+{
+    qDebug()<<"saveStatistic";
+    QString content = dataMeaning.fieldsStatisticHeader().implode(",");
+    QVector <Array> values = dataMeaning.statisticMatrix();
+    for (int i = 0; i < values.size(); i++) {
+        content = content + "\n" + values[i].implode(",");
+    }
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), ".", tr("Text (*.txt)"));
+    if (fileName.trimmed().right(4) != ".txt") fileName = fileName + ".txt";
+
+    QFile file(fileName);
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream stream(&file);
+        stream << (content + "\n");
+        file.close();
+        QMessageBox::information(this, tr("File is saved"), file.errorString());
+    }
+}
 
 void MainWindow :: removeLoadedDataRow(int index)
 {

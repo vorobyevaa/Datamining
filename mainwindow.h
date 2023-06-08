@@ -23,6 +23,7 @@ private:
 
 private slots:
     void importFile();
+    void saveStatistic();
     void about();
     void support();
     void exit();

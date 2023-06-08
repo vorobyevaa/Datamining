@@ -4,6 +4,7 @@
 #include <QByteArray>
 #include <QList>
 #include <QVector>
+#include "array.h"
 #include "datarow.h"
 #include "datameaningcore.h"
 
@@ -12,12 +13,12 @@ class DataMeaning
 public:
     DataMeaning();
     void load(QList<QByteArray> content);
-    QVector <QVector <QString>> loadedMatrix() const;
-    QVector <QVector <QString>> statisticMatrix() const;
-    QVector <QString> values(QString field);
+    QVector <Array> loadedMatrix() const;
+    QVector <Array> statisticMatrix() const;
+    Array values(QString field);
     int getFieldsSize() const;
-    QVector <QString> fieldsHeader() const;
-    QVector <QString> fieldsStatisticHeader() const;
+    Array fieldsHeader() const;
+    Array fieldsStatisticHeader() const;
     void removeRow(int index);
     void removeHeader(int index);
 
@@ -26,7 +27,7 @@ private:
     QVector <DataRow> dataRows;
     QList <QByteArray> header;
     DataMeaningCore dataMeaningCore;
-    QVector <QVector <QString> > statisticValues;
+    QVector <Array> statisticValues;
 };
 
 #endif // DATAMEANING_H

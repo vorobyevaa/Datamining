@@ -42,7 +42,7 @@ Ptable :: Ptable(QWidget * owner) : QTableWidget(owner) {
 
 }
 
-void Ptable :: setValues(QVector <QVector <QString> > values)
+void Ptable :: setValues(QVector <Array> values)
 {
     this->setRowCount(values.size());
     for (int i = 0; i < values.size(); i++)
@@ -56,7 +56,7 @@ void Ptable :: setValues(QVector <QVector <QString> > values)
     }
 }
 
-void Ptable :: setHeader(QVector <QString> header)
+void Ptable :: setHeader(Array header)
 {
     this->setColumnCount(header.size()+1);
     for (int i = 0; i < header.size(); i++) {

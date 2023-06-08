@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     about.cpp \
+    array.cpp \
     datameaning.cpp \
     datameaningcore.cpp \
     datarow.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 
 HEADERS += \
     about.h \
+    array.h \
     datameaning.h \
     datameaningcore.h \
     datarow.h \
