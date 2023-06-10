@@ -11,7 +11,14 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, 
     QMap <QString, QString> colors;
     colors["красный"] = "red";
     colors["синий"] = "blue";
-    colors["цвет госпожи лапули"] = "gold";
+    colors["жёлтый"] = "gold";
+    colors["коричневый"] = "brown";
+    colors["чёрный"] = "black";
+    colors["зелёный"] = "green";
+    colors["белый"] = "white";
+    colors["розовый"] = "pink";
+    colors["серый"] = "grey";
+    colors["голубой"] = "blue";
     createChart(values, colors[color], colors[bcolor]);
 }
 
