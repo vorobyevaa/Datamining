@@ -98,18 +98,19 @@ int DataMeaning::getFieldsSize() const
 
 Array DataMeaning::fieldsStatisticHeader() const
 {
-    Array result(11);
+    Array result(12);
     result[0] = "Название";
-    result[1] = "Максимум";
-    result[2] = "Минимум";
-    result[3] = "Тип";
-    result[4] = "Варианты";
-    result[5] = "Название";
-    result[6] = "Максимум";
-    result[7] = "Минимум";
-    result[8] = "Тип";
-    result[9] = "Варианты";
-    result[10] = "Варианты";
+    result[1] = "Тип";
+    result[2] = "Количество";
+    result[3] = "Максимум";
+    result[4] = "Минимум";
+    result[5] = "Ср.значение";
+    result[6] = "Ст.отклонение";
+    result[7] = "Квартиль 25";
+    result[8] = "Медиана";
+    result[9] = "Квартиль 75";
+    result[10] = "Разброс";
+    result[11] = "Дисперсия";
     return result;
 }
 
