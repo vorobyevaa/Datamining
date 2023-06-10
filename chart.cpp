@@ -23,14 +23,14 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, 
     chart->removeAllSeries();
 
 
-  QAbstractAxis * axisX = new QValueAxis();
-   axisX->setTitleText(m_caption.first);
+ // QAbstractAxis * axisX = new QValueAxis();
+ //  axisX->setTitleText(m_caption.first);
      //  axisX.setRange(0, 30)
        //axisX.setLabelFormat("%.1f")
     //   axisX.setTickCount(7)
 
-   QAbstractAxis * axisY = new QValueAxis();
-           axisY->setTitleText(m_caption.second);
+  // QAbstractAxis * axisY = new QValueAxis();
+     //      axisY->setTitleText(m_caption.second);
      //  axisY.setRange(0, 100)
      //  axisY.setLabelFormat("%d")
      ////  axisY.setMinorTickCount(5)
@@ -60,26 +60,37 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, 
        }
        chart->addSeries(series);
 
-     //  series->attachAxis(axisX);
-       //     series->attachAxis(axisY);
+      // series->attachAxis(axisX);
+           // series->attachAxis(axisY);
+
+
+            // series->attachAxis(axisX);
+              //    series->attachAxis(axisY);
+              //    chart->setAxisX(axisX, series);
+              //    chart->setAxisY(axisY, series);
     }
 
     chart->createDefaultAxes();
-
+chart->axes(Qt::Horizontal).back()->setTitleText(m_caption.first);
+chart->axes(Qt::Vertical).back()->setTitleText(m_caption.second);
     QChartView *chartView = new QChartView(chart, m_parent);
     chartView->setGeometry(0,0,m_parent->size().width(),m_parent->size().height());
     chartView->setRenderHint(QPainter::Antialiasing);
 
-  // chart->addAxis(axisX, Qt::AlignLeft);
-    //   chart->addAxis(axisY, Qt::AlignLeft);
+ //  chart->addAxis(axisX, Qt::AlignLeft);
+     //  chart->addAxis(axisY, Qt::AlignLeft);
 //
     chartView->show();
 }
 
 void Chart :: setTitle(QString title, QPair <QString, QString> caption)
 {
-    chart->setTitle(title);
+        qDebug()<<"SUPERHER";
+   // chart->setTitle(title);
+        qDebug()<<"SUPERHER";
     m_caption = caption;
+    qDebug()<<"SUPERHER";
+    qDebug()<<caption;
 }
 
 void Chart :: createChart(QVector <double> values, QVector <QString> x, QString title)

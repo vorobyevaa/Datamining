@@ -108,8 +108,11 @@ void MainWindow :: buildChart()
     qDebug()<<ui->cb_valuex->currentIndex()<<"\t"<<ui->cb_valuey->currentIndex();
     QVector <QString> header = dataMeaning.fieldsHeader();
 
-    QVector <QString> x = dataMeaning.values(header[ui->cb_valuex->currentIndex()], dataMeaning.isSymbolHeaderField(ui->cb_valuex->currentIndex()));
-    QVector <QString> y = dataMeaning.values(header[ui->cb_valuey->currentIndex()], dataMeaning.isSymbolHeaderField(ui->cb_valuey->currentIndex()));
+    QString xcaption = header[ui->cb_valuex->currentIndex()];
+    QString ycatpion = header[ui->cb_valuey->currentIndex()];
+
+    QVector <QString> x = dataMeaning.values(xcaption, dataMeaning.isSymbolHeaderField(ui->cb_valuex->currentIndex()));
+    QVector <QString> y = dataMeaning.values(ycatpion, dataMeaning.isSymbolHeaderField(ui->cb_valuey->currentIndex()));
 
     QVector <QVector <QPair <double, double> > > values(1);
     values[0].resize(x.size());
@@ -118,7 +121,11 @@ void MainWindow :: buildChart()
         values[0][i] = qMakePair(x[i].toDouble(), y[i].toDouble());
     }
 
-    qDebug()<<values;
+    qDebug()<<"--------------------------------------"<<values;
+    qDebug()<<"--------------------------------------"<<qMakePair(xcaption, ycatpion);
+    this->chChart->setTitle("",qMakePair(xcaption, ycatpion));
+
+    qDebug()<<"--------------------------------------"<<values;
     this->chChart->createChart(values, ui->cb_plot->currentIndex(), ui->cb_color->currentText(), ui->cb_bcolor->currentText());
 }
 

@@ -43,9 +43,12 @@ qDebug()<<"rows = "<<dataRows.size();
         }
         content = content + row + "\n";
     }
-    qDebug()<<content;
+    qDebug()<<"==================================================================================";
+    qDebug()<<content.length()<<"\t"<<content;
+     qDebug()<<"==================================================================================";
  //   qDebug()<<QCoreApplication::applicationDirPath();
     QFile file(QCoreApplication::applicationDirPath() + "/"+scriptname+".tmp");
+    file.remove();
     if (file.open(QIODevice::ReadWrite)) {
         QTextStream stream(&file);
         stream << content << endl;
