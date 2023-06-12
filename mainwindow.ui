@@ -69,15 +69,15 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="p_data">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>771</width>
+         <height>427</height>
         </rect>
        </property>
        <attribute name="label">
@@ -105,8 +105,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>771</width>
+         <height>427</height>
         </rect>
        </property>
        <attribute name="label">
@@ -128,8 +128,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>771</width>
+         <height>427</height>
         </rect>
        </property>
        <attribute name="label">
@@ -439,7 +439,7 @@
          <x>0</x>
          <y>0</y>
          <width>771</width>
-         <height>423</height>
+         <height>427</height>
         </rect>
        </property>
        <attribute name="label">
@@ -471,7 +471,7 @@
          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
@@ -518,7 +518,7 @@ p, li { white-space: pre-wrap; }
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="p_target">
        <property name="geometry">
@@ -526,7 +526,7 @@ p, li { white-space: pre-wrap; }
          <x>0</x>
          <y>0</y>
          <width>751</width>
-         <height>373</height>
+         <height>377</height>
         </rect>
        </property>
        <attribute name="label">
@@ -538,7 +538,7 @@ p, li { white-space: pre-wrap; }
           <x>10</x>
           <y>0</y>
           <width>721</width>
-          <height>251</height>
+          <height>361</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -550,8 +550,16 @@ p, li { white-space: pre-wrap; }
        </widget>
       </widget>
       <widget class="QWidget" name="p_chart">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>751</width>
+         <height>377</height>
+        </rect>
+       </property>
        <attribute name="label">
-        <string>Страница</string>
+        <string>Распределение значений</string>
        </attribute>
        <widget class="QFrame" name="frame_second_chart">
         <property name="geometry">
@@ -570,18 +578,13 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="p_histogram">
-       <attribute name="label">
-        <string>Распределение значений</string>
-       </attribute>
-      </widget>
       <widget class="QWidget" name="p_type_model">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
          <width>751</width>
-         <height>405</height>
+         <height>377</height>
         </rect>
        </property>
        <attribute name="label">
@@ -684,8 +687,8 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>751</width>
+         <height>377</height>
         </rect>
        </property>
        <attribute name="label">
@@ -718,7 +721,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>787</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">

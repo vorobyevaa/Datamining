@@ -5,6 +5,7 @@ import numpy as np
 
 from sklearn.model_selection import train_test_split
 
+#sys.stdout.encoding
 
 
 if (len(sys.argv) == 2):
@@ -60,5 +61,21 @@ else:
     model= {"name":[1,2,3],"age":[2,8,7]}
     weight= {"name" : 1, "age" :3}
     data={"model":  coeff_df}
-    print(data);
+    print(coeff_df)
+    print(data)
+    #print(json.dumps(out,         sort_keys=False,         indent=4,           ensure_ascii=False,                     separators=(',', ': ')))
+    
+col=len(coeff_df.axes[1])
+print (len(coeff_df.axes[0]))
+
+table={}
+for i in range(0,col,1):
+    n=coeff_df.columns[i]
+    table[n]=coeff_df.iloc[:,i].tolist()
+    
+print(table)   
+
+jsoon={"one":table}
+print(jsoon)
+#print({coeff_df.columns[1]:coeff_df.iloc[:,1].tolist()})
 
