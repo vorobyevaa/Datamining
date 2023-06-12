@@ -17,6 +17,8 @@ else:
     print("predict")
     x=pd.read_csv(sys.argv[1])
     y=pd.read_csv(sys.argv[2])
+    number=sys.argv[3]
+    print (type(int(number)))
     #name columns
     cols=y.columns
     print(cols[0])
@@ -54,7 +56,8 @@ else:
     print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred)) 
     print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred)) 
     print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
-
+    er={'Mean Absolute Error':metrics.mean_absolute_error(y_test, y_pred),'Mean Squared Error:': metrics.mean_squared_error(y_test, y_pred),'Root Mean Squared Error:': np.sqrt(metrics.mean_squared_error(y_test, y_pred))}
+    #erdf=pd.DataFrame(er)
 
 
     
@@ -75,7 +78,7 @@ for i in range(0,col,1):
     
 print(table)   
 
-jsoon={"one":table}
+jsoon={"Model":table,"Error":er}
 print(jsoon)
 #print({coeff_df.columns[1]:coeff_df.iloc[:,1].tolist()})
 
