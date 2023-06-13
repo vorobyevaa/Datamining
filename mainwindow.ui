@@ -14,32 +14,6 @@
    <string>Анализ экономических систем</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pb_start">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>720</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Старт</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pb_delete">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>720</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Отмена</string>
-    </property>
-   </widget>
    <widget class="QTabWidget" name="tw_analysis">
     <property name="enabled">
      <bool>true</bool>
@@ -69,7 +43,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="p_data">
        <property name="geometry">
@@ -518,7 +492,7 @@ p, li { white-space: pre-wrap; }
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="p_target">
        <property name="geometry">
@@ -681,6 +655,19 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </widget>
+       <widget class="QPushButton" name="pb_start">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>350</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Старт</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -700,7 +687,7 @@ p, li { white-space: pre-wrap; }
           <x>19</x>
           <y>19</y>
           <width>641</width>
-          <height>341</height>
+          <height>201</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -709,6 +696,35 @@ p, li { white-space: pre-wrap; }
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
+       </widget>
+       <widget class="QFrame" name="f_result_calc">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>240</y>
+          <width>641</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QPushButton" name="pb_start_2">
+         <property name="geometry">
+          <rect>
+           <x>460</x>
+           <y>92</y>
+           <width>75</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Старт</string>
+         </property>
+        </widget>
        </widget>
       </widget>
      </widget>

@@ -3,18 +3,14 @@
 #include <QFile>
 #include <QCoreApplication>
 #include <QIODevice>
-//#include "gui/PythonQtScriptingConsole.h"
 #include <QProcess>
 
 DataMeaningCore :: DataMeaningCore()
-{
-   // PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut);
-    //mainModule = PythonQt::self()->getMainModule();
+{   
 }
 
 void DataMeaningCore :: callStatisticPy(QVector <DataRow> dataRows, QString header, QString scriptname)
 {
-    qDebug()<<"header = "<<header<<"\t"<<scriptname;
     Array bHeader;
     bHeader.push_back(header);
     callStatisticPy(dataRows, bHeader, scriptname);
@@ -22,10 +18,6 @@ void DataMeaningCore :: callStatisticPy(QVector <DataRow> dataRows, QString head
 
 void DataMeaningCore :: callStatisticPy(QVector <DataRow> dataRows, Array header, QString scriptname)
 {
-   // PythonQtScriptingConsole console(NULL, mainModule);
-   // PythonQt::self()->registerCPPClass("PythonParameter", "","example", PythonQtCreateObject<PythonParameterWrapper>);
-
-qDebug()<<"rows = "<<dataRows.size();
     QString content = "";
     for (int j = 0; j < header.size(); j++)
     {
@@ -42,11 +34,7 @@ qDebug()<<"rows = "<<dataRows.size();
             row = row + dataRows[i].value(header[j]);
         }
         content = content + row + "\n";
-    }
-    qDebug()<<"==================================================================================";
-    qDebug()<<content.length()<<"\t"<<content;
-     qDebug()<<"==================================================================================";
- //   qDebug()<<QCoreApplication::applicationDirPath();
+    }    
     QFile file(QCoreApplication::applicationDirPath() + "/"+scriptname+".tmp");
     file.remove();
     if (file.open(QIODevice::ReadWrite)) {
@@ -55,35 +43,38 @@ qDebug()<<"rows = "<<dataRows.size();
         file.close();
     }
 
-     QStringList outputList = callScript(scriptname, scriptname+".tmp").split("\n\n");
+    QStringList outputList = callScript(scriptname, scriptname+".tmp").split("\n\n");
 
     reportValues.clear();
-    for (int i = 0; i < outputList.size(); i++) {
+    for (int i = 0; i < outputList.size(); i++)
+    {
         Array rep;
-        QStringList sl = outputList[i].split("\n");
-
-      //  qDebug()<<sl.size();
-     //    qDebug()<<sl;
+        QStringList sl = outputList[i].split("\n");      
         if (sl.size() <= 1) continue;
-        for (int j = 0; j < sl.size(); j++) rep.push_back(sl[j]);
-     //       qDebug()<<rep;
+        for (int j = 0; j < sl.size(); j++) rep.push_back(sl[j]);     
         reportValues.push_back(rep);
     }
-  //  qDebug()<<reportValues;
 }
 
-QString DataMeaningCore :: callScript(QString scriptname, QString param)
+QString DataMeaningCore :: callScript(QString scriptname, QString param, QString otherParam, QString thirdParam)
 {
     QProcess pingProcess;
     QString exec = "python3";
     QStringList params;
     params.push_back(scriptname + ".py");
     params.push_back(param);
-    pingProcess.start(exec, params);
-//    qDebug()<<"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&";
-    qDebug()<<params;
-    pingProcess.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
-    return pingProcess.readAllStandardOutput();
+    if (!otherParam.isEmpty())
+    {
+        params.push_back(otherParam);
+    }
+    if (!thirdParam.isEmpty())
+    {
+        params.push_back(thirdParam);
+    }
+    pingProcess.start(exec, params);    
+    pingProcess.waitForFinished();
+    QString s = pingProcess.readAllStandardOutput();
+    return s;
 }
 
 QVector <Array> DataMeaningCore :: report()

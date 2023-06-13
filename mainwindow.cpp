@@ -33,6 +33,26 @@ MainWindow::MainWindow(QWidget *parent)
     chSecondChart = new Chart(ui->frame_second_chart);
     connect(ptSecondData->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(selectSecondDataColumn(int)));
     connect(ui->pb_start, SIGNAL(clicked()), this, SLOT(buildReport()));
+
+    QLineEdit * calcResultEditX = new QLineEdit(ui->f_result_calc);
+    calcResultEditX->setGeometry(200, 25, 125, 25);
+    calcResultEditX->show();
+
+    QLabel * calcResultCaptionX = new QLabel(ui->f_result_calc);
+    calcResultCaptionX->setGeometry(25, 25, 155, 25);
+    calcResultCaptionX->setText("Входное значение");
+    calcResultCaptionX->show();
+
+    QLineEdit * calcResultEditY = new QLineEdit(ui->f_result_calc);
+    calcResultEditY->setGeometry(200, 75, 125, 25);
+    calcResultEditY->show();
+
+    QLabel * calcResultCaptionY = new QLabel(ui->f_result_calc);
+    calcResultCaptionY->setGeometry(25, 75, 155, 25);
+    calcResultCaptionY->setText("Выходное значение");
+    calcResultCaptionY->show();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -66,14 +86,12 @@ void MainWindow::importFile()
 
         ptSecondData->setHeader(dataMeaning.fieldsHeader());
         ptSecondData->setValues(dataMeaning.loadedMatrix());
-
         ui->pb_start->setEnabled(false);
     }
 }
 
 void MainWindow :: saveStatistic()
 {
-    qDebug()<<"saveStatistic";
     QString content = dataMeaning.fieldsStatisticHeader().implode(",");
     QVector <Array> values = dataMeaning.statisticMatrix();
     for (int i = 0; i < values.size(); i++) {
@@ -124,18 +142,13 @@ void MainWindow :: buildChart()
         values[0][i] = qMakePair(x[i].toDouble(), y[i].toDouble());
     }
 
-    qDebug()<<"--------------------------------------"<<values;
-    qDebug()<<"--------------------------------------"<<qMakePair(xcaption, ycatpion);
     this->chChart->setTitle("",qMakePair(xcaption, ycatpion));
-
-    qDebug()<<"--------------------------------------"<<values;
     this->chChart->createChart(values, ui->cb_plot->currentIndex(), ui->cb_color->currentText(), ui->cb_bcolor->currentText());
 }
 
 void MainWindow :: selectSecondDataColumn(int index)
 {
     QPair <QVector <double>, QVector <QString> > chartValues = dataMeaning.prepareToPredict(index-1);
-    qDebug()<<chartValues;
     chSecondChart->createChart(chartValues.first, chartValues.second, dataMeaning.fieldsHeader()[index-1]);
     ui->pb_start->setEnabled(true);
 }
@@ -183,14 +196,11 @@ void MainWindow :: buildReport()
     QJsonDocument doc(json);
     QString models = QLatin1String(doc.toJson(QJsonDocument::Compact));
 
-    qDebug()<<models;
-
     Report report = dataMeaning.createReport(models);
     Array reportKeys = report.keys();
 
     if (!m_createReportFlag)
     {
-        qDebug()<<reportKeys;
         m_reportTabWidgetItems.resize(reportKeys.size());
         QTabWidget * reportTabWidget = new QTabWidget(ui->f_result);
         reportTabWidget->resize(ui->f_result->size());

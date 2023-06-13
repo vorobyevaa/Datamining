@@ -31,7 +31,6 @@ Ptable :: Ptable(QWidget * owner) : QTableWidget(owner) {
     this->setVerticalHeaderItem(0,twiBord);
 
     QTableWidgetItem *thumbnail = new QTableWidgetItem;
-    //    thumbnail->setData(Qt::DecorationRole, QPixmap::fromImage(*img).scaled(20,20));
 
     this->setItem(0, 0, thumbnail);
 
@@ -41,7 +40,7 @@ Ptable :: Ptable(QWidget * owner) : QTableWidget(owner) {
     this->setItem(0, 2, thumbnail);
 
     m_shift = 1;
-     m_columnTitlesFlag = false;
+    m_columnTitlesFlag = false;
 }
 
 void Ptable :: setShift(int value)

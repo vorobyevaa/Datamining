@@ -29,19 +29,6 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, 
     chart->legend()->hide();
     chart->removeAllSeries();
 
-
- // QAbstractAxis * axisX = new QValueAxis();
- //  axisX->setTitleText(m_caption.first);
-     //  axisX.setRange(0, 30)
-       //axisX.setLabelFormat("%.1f")
-    //   axisX.setTickCount(7)
-
-  // QAbstractAxis * axisY = new QValueAxis();
-     //      axisY->setTitleText(m_caption.second);
-     //  axisY.setRange(0, 100)
-     //  axisY.setLabelFormat("%d")
-     ////  axisY.setMinorTickCount(5)
-
     for (int k = 0; k < values.size(); k++)
     {
        QXYSeries *series;
@@ -57,8 +44,6 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, 
             break;
        }
 
-
-     // series->setUseOpenGL(true);
        series->setColor(QColor(color));
        series->setName(" " + QString::number(k));
        for (int i = 0; i < values[k].size(); i++)
@@ -66,15 +51,6 @@ void Chart :: createChart(QVector <QVector <QPair <double, double > > > values, 
          series->append(values[k][i].first, values[k][i].second);
        }
        chart->addSeries(series);
-
-      // series->attachAxis(axisX);
-           // series->attachAxis(axisY);
-
-
-            // series->attachAxis(axisX);
-              //    series->attachAxis(axisY);
-              //    chart->setAxisX(axisX, series);
-              //    chart->setAxisY(axisY, series);
     }
 
     chart->createDefaultAxes();
@@ -92,12 +68,7 @@ chart->axes(Qt::Vertical).back()->setTitleText(m_caption.second);
 
 void Chart :: setTitle(QString title, QPair <QString, QString> caption)
 {
-        qDebug()<<"SUPERHER";
-   // chart->setTitle(title);
-        qDebug()<<"SUPERHER";
     m_caption = caption;
-    qDebug()<<"SUPERHER";
-    qDebug()<<caption;
 }
 
 void Chart :: createChart(QVector <double> values, QVector <QString> x, QString title)
@@ -106,7 +77,8 @@ void Chart :: createChart(QVector <double> values, QVector <QString> x, QString 
 
     // максимальное значение (для выставления высоты графика)
     double max = 0;
-    for (int i = 0; i < values.size(); i++) {
+    for (int i = 0; i < values.size(); i++)
+    {
         *set1 << values[i];
         double pm = values[i];//ui->tableWidget->item(i, 1)->text().toDouble();
         max = (max <pm) ? pm : max;

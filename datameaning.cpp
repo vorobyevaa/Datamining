@@ -13,7 +13,6 @@ void DataMeaning::load(QList<QByteArray> content)
     if (content.size() == 0) {
         return;
     }
-
     QList <QByteArray> byteArray = content[0].split(',');
     m_header.resize(byteArray.size());
     for (int i = 0; i < byteArray.size(); i++) m_header[i] = ((QString)byteArray[i]).trimmed();
@@ -26,17 +25,10 @@ void DataMeaning::load(QList<QByteArray> content)
             }
         }
     }
-//qDebug()<<"rows = "<<dataRows.size();
+
     m_dataMeaningCore.callStatisticPy(m_dataRows, m_header, "statistic");
-    qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
     QVector <Array> report = m_dataMeaningCore.report();
-    for (int i = 0; i < report.size(); i++) {
-        for (int j = 0; j < report[i].size(); j++) {
-            qDebug()<<i<<"\t"<<j<<"\t"<<report[i][j]<<"\t";
-        }
-        qDebug()<<"\n";
-    }
-qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+
     statisticValues.resize(m_header.size());
     for (int i = 0; i < statisticValues.size(); i++)
     {
@@ -58,16 +50,12 @@ qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     val = m_pythonTypes[val];
                 }
                 statisticValues[i].push_back(val);
-           // qDebug()<<"c "<<i;
             }
             else {
-            //    qDebug()<<"c "<<i;
                 statisticValues[i].push_back("");
-           //     qDebug()<<"d";
             }
         }
     }
-   // qDebug()<<"--------------------------------------------------------------";
 
     m_dataMeaningCore.callStatisticPy(m_dataRows, m_header, "statistic");
 }
@@ -85,10 +73,8 @@ QVector <Array>  DataMeaning::loadedMatrix() const
 }
 
 QVector <Array> DataMeaning::statisticMatrix() const
-{
-    qDebug()<<statisticValues;
+{    
     return statisticValues;
-
 }
 
 int DataMeaning::getFieldsSize() const
@@ -117,7 +103,8 @@ Array DataMeaning::fieldsStatisticHeader() const
 Array DataMeaning :: fieldsHeader() const
 {
     Array result(m_header.size());
-    for (int i = 0; i < result.size(); i++) {
+    for (int i = 0; i < result.size(); i++)
+    {
         result[i] = m_header[i];
     }
     return result;
@@ -155,16 +142,11 @@ Array DataMeaning :: values(QString field, bool isToNum)
     Array result(m_dataRows.size());
     if (isToNum)
     {
-
         QMap <QString, int> keys = fieldKeys(field);
-        qDebug()<<keys;
         for (int i = 0; i < m_dataRows.size(); i++)
         {
             result[i] = QString::number(keys[m_dataRows[i].value(field)]);
-        }
-        qDebug()<<"result";
-        qDebug()<<result;
-
+        }        
     }
     else
     {
@@ -178,20 +160,15 @@ Array DataMeaning :: values(QString field, bool isToNum)
 }
 
 QPair <QVector <double>, QVector <QString> > DataMeaning :: prepareToPredict(int fieldIndex)
-{
-    //    qDebug()<<fieldIndex<<"\t"<<(QString)m_header[fieldIndex];
-    m_dataMeaningCore.callStatisticPy(m_dataRows, m_header[fieldIndex], "predict");
-    qDebug()<<"******************************+++++++++++++++++++++++++++++++++++++";
-    QVector <Array> report = m_dataMeaningCore.report();
-
-     qDebug()<<report[0]<<"=================";
+{    
+     m_dataMeaningCore.callStatisticPy(m_dataRows, m_header[fieldIndex], "predict");
+     QVector <Array> report = m_dataMeaningCore.report();
      QMap <QString, int> keys = fieldKeys(m_header[fieldIndex]);
      QVector <double> y;
      QVector <QString> x;
      for (int i = 1; i < report[0].size(); i++)
      {
          int delimIndex = report[0][i].lastIndexOf(' ');
-         qDebug()<<report[0][i].left(delimIndex).trimmed()<<" = "<<report[0][i].right(report[0][i].size() - delimIndex).trimmed();
          if (!report[0][i].left(delimIndex).trimmed().isEmpty())
          {
              x.push_back(report[0][i].left(delimIndex).trimmed());
@@ -209,7 +186,6 @@ bool DataMeaning :: isSymbolHeaderField(int fieldIndex)
 
 Report DataMeaning :: createReport(QString models)
 {
-    QString result = m_dataMeaningCore.callScript("predict", "statistic.tmp predict.tmp "+models);
-    qDebug()<<result;
-    return Report();
+    QString result = m_dataMeaningCore.callScript("predict", "statistic.tmp", "predict.tmp", models);
+    return Report(result);
 }

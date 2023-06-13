@@ -8,7 +8,7 @@
 class Report
 {
 public:
-    Report();
+    Report(QString value);
     Array keys();
     Array keys(QString parentKey);
     QVector <Array> values(QString parentKey);
