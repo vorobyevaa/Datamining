@@ -23,6 +23,7 @@ SOURCES += \
     datarow.cpp \
     main.cpp \
     mainwindow.cpp ptable.cpp chart.cpp \
+    report.cpp \
     support.cpp
 
 HEADERS += \
@@ -32,6 +33,7 @@ HEADERS += \
     datameaningcore.h \
     datarow.h \
     mainwindow.h ptable.h chart.h \
+    report.h \
     support.h
 
 FORMS += \

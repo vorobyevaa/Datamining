@@ -206,3 +206,10 @@ bool DataMeaning :: isSymbolHeaderField(int fieldIndex)
 {
     return (m_headerTypes[m_header[fieldIndex]] == "object");
 }
+
+Report DataMeaning :: createReport(QString models)
+{
+    QString result = m_dataMeaningCore.callScript("predict", "statistic.tmp predict.tmp "+models);
+    qDebug()<<result;
+    return Report();
+}

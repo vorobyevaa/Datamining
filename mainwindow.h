@@ -32,6 +32,7 @@ private slots:
     void removeStatisticDataRow(int index);
     void buildChart();
     void selectSecondDataColumn(int index);
+    void buildReport();
 private:
     Ui::MainWindow *ui;
     Ptable * ptLoadedData;
