@@ -9,6 +9,8 @@ class Ptable : public QTableWidget
     Q_OBJECT
 public:
     Ptable(QWidget * owner = 0);
+    void setShift(int value);
+    void setColumnTitles(Array titles);
     void setValues(QVector <Array> values);
     void setHeader(Array header);
     bool checkValues(bool showMessageFlag);
@@ -23,6 +25,9 @@ private:
     void _createRow(int rowIndex);
     QVector <QPair <double, double> > m_values;
     double m_a;
+    int m_shift;
+    bool m_columnTitlesFlag;
+    Array m_columnTitles;
 
 private slots:
     void sl_cellClicked(int row, int column);
@@ -33,3 +38,4 @@ signals:
 };
 
 #endif
+

@@ -30,16 +30,29 @@ Ptable :: Ptable(QWidget * owner) : QTableWidget(owner) {
     twiBord->setText("0");
     this->setVerticalHeaderItem(0,twiBord);
 
-        QTableWidgetItem *thumbnail = new QTableWidgetItem;
+    QTableWidgetItem *thumbnail = new QTableWidgetItem;
     //    thumbnail->setData(Qt::DecorationRole, QPixmap::fromImage(*img).scaled(20,20));
 
-        this->setItem(0, 0, thumbnail);
+    this->setItem(0, 0, thumbnail);
 
-        loaded = img->load(QDir::currentPath() + "/img/gray.jpeg");
-       thumbnail = new QTableWidgetItem();
-        thumbnail->setData(Qt::DecorationRole, QPixmap::fromImage(*img).scaled(200,30));
-     this->setItem(0, 2, thumbnail);
+    loaded = img->load(QDir::currentPath() + "/img/gray.jpeg");
+    thumbnail = new QTableWidgetItem();
+    thumbnail->setData(Qt::DecorationRole, QPixmap::fromImage(*img).scaled(200,30));
+    this->setItem(0, 2, thumbnail);
 
+    m_shift = 1;
+     m_columnTitlesFlag = false;
+}
+
+void Ptable :: setShift(int value)
+{
+    m_shift = value;
+}
+
+void Ptable :: setColumnTitles(Array titles)
+{
+    m_columnTitles = titles;
+    m_columnTitlesFlag = true;
 }
 
 void Ptable :: setValues(QVector <Array> values)
@@ -51,18 +64,18 @@ void Ptable :: setValues(QVector <Array> values)
         for (int j = 0; j < values[i].size(); j++) {
             QTableWidgetItem * twiJ = new QTableWidgetItem();
             twiJ->setText(values[i][j]);
-            this->setItem(i,j+1,twiJ);
+            this->setItem(i,j+m_shift,twiJ);
         }
     }
 }
 
 void Ptable :: setHeader(Array header)
 {
-    this->setColumnCount(header.size()+1);
+    this->setColumnCount(header.size()+m_shift);
     for (int i = 0; i < header.size(); i++) {
         QTableWidgetItem *twiBord = new QTableWidgetItem();
         twiBord->setText(header[i]);
-        this->setHorizontalHeaderItem(i+1,twiBord);
+        this->setHorizontalHeaderItem(i+m_shift,twiBord);
     }
     QTableWidgetItem *twiBord = new QTableWidgetItem();
     twiBord->setText("");
@@ -78,7 +91,7 @@ void Ptable :: _createRow(int rowIndex)
     this->setItem(rowIndex, 0, thumbnail);
 
     QTableWidgetItem *twiBord = new QTableWidgetItem();
-    twiBord->setText(QString::number(rowIndex));
+    twiBord->setText((m_columnTitlesFlag) ? m_columnTitles[rowIndex] : QString::number(rowIndex));
     this->setVerticalHeaderItem(rowIndex,twiBord);
 }
 

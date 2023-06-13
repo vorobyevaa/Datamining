@@ -1,12 +1,15 @@
 #include "mainwindow.h"
 #include "about.h"
 #include "support.h"
+#include "report.h"
 #include "ui_mainwindow.h"
 #include <QPair>
+#include <QSizePolicy>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , m_createReportFlag(false)
 {
     ui->setupUi(this);
   //  setWindowFlags(windowFlags() &(~Qt::WindowMaximizeButtonHint));
@@ -24,13 +27,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ptLoadedData, SIGNAL(removeRowSignal(int)), this, SLOT(removeLoadedDataRow(int)));
     connect(ptStaticticData, SIGNAL(removeRowSignal(int)), this, SLOT(removeStatisticDataRow(int)));
-    connect(ptStaticticData, SIGNAL(removeRowSignal(int)), this, SLOT(removeStatisticDataRow(int)));
     connect(ui->pb_build_chart, SIGNAL(clicked()), this, SLOT(buildChart()));
 
     ptSecondData = new Ptable(ui->frame_table_2);
     chSecondChart = new Chart(ui->frame_second_chart);
     connect(ptSecondData->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(selectSecondDataColumn(int)));
-  //  ui->gb_predict->hide();
+    connect(ui->pb_start, SIGNAL(clicked()), this, SLOT(buildReport()));
 }
 
 MainWindow::~MainWindow()
@@ -64,7 +66,8 @@ void MainWindow::importFile()
 
         ptSecondData->setHeader(dataMeaning.fieldsHeader());
         ptSecondData->setValues(dataMeaning.loadedMatrix());
-   //     ui->cb_load_4->setChecked(true);
+
+        ui->pb_start->setEnabled(false);
     }
 }
 
@@ -131,16 +134,10 @@ void MainWindow :: buildChart()
 
 void MainWindow :: selectSecondDataColumn(int index)
 {
-    qDebug()<<index;
-  //  ui->cb_select_target_4->setChecked(true);
-  //  ptSecondData->setDisabled(true);
-
     QPair <QVector <double>, QVector <QString> > chartValues = dataMeaning.prepareToPredict(index-1);
     qDebug()<<chartValues;
     chSecondChart->createChart(chartValues.first, chartValues.second, dataMeaning.fieldsHeader()[index-1]);
-   // ui->gb_predict->show();
-  //  ui->frame_table_2->hide();
-
+    ui->pb_start->setEnabled(true);
 }
 
 void MainWindow :: loadChartSelectors() {
@@ -174,4 +171,35 @@ void MainWindow :: support()
 
 void MainWindow::exit() {
     QApplication::quit();
+}
+
+void MainWindow :: buildReport()
+{
+    QObjectList widgetList = ui->gb_predict->children();
+    QJsonObject json;
+    for (int i = 0; i < widgetList.size(); i++) {
+        json.insert(widgetList[i]->objectName(), ((QCheckBox*)widgetList[i])->isChecked());
+    }
+    QJsonDocument doc(json);
+    QString models = QLatin1String(doc.toJson(QJsonDocument::Compact));
+
+    qDebug()<<models;
+
+    Report report = dataMeaning.createReport(models);
+    Array reportKeys = report.keys();
+
+    if (!m_createReportFlag)
+    {
+        qDebug()<<reportKeys;
+        m_reportTabWidgetItems.resize(reportKeys.size());
+        QTabWidget * reportTabWidget = new QTabWidget(ui->f_result);
+        reportTabWidget->resize(ui->f_result->size());
+        for (int i = 0; i < reportKeys.size(); i++)
+        {
+            m_reportTabWidgetItems[i] = new ReportTabWidgetItem(reportTabWidget, reportKeys[i]);
+            m_reportTabWidgetItems[i]->setValues(report.keys(reportKeys[i]), report.values(reportKeys[i]));
+        }
+        reportTabWidget->show();
+        m_createReportFlag = true;
+    }
 }

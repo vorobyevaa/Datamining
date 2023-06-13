@@ -55,17 +55,7 @@ qDebug()<<"rows = "<<dataRows.size();
         file.close();
     }
 
-     QProcess pingProcess;
-     QString exec = "python3";
-     QStringList params;
-     params.push_back(scriptname + ".py");
-     params.push_back(scriptname+".tmp");
-     pingProcess.start(exec, params);
- //    qDebug()<<"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&";
-     qDebug()<<params;
-     pingProcess.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
-     QString output(pingProcess.readAllStandardOutput());
-     QStringList outputList = output.split("\n\n");
+     QStringList outputList = callScript(scriptname, scriptname+".tmp").split("\n\n");
 
     reportValues.clear();
     for (int i = 0; i < outputList.size(); i++) {
@@ -82,6 +72,19 @@ qDebug()<<"rows = "<<dataRows.size();
   //  qDebug()<<reportValues;
 }
 
+QString DataMeaningCore :: callScript(QString scriptname, QString param)
+{
+    QProcess pingProcess;
+    QString exec = "python3";
+    QStringList params;
+    params.push_back(scriptname + ".py");
+    params.push_back(param);
+    pingProcess.start(exec, params);
+//    qDebug()<<"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&";
+    qDebug()<<params;
+    pingProcess.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
+    return pingProcess.readAllStandardOutput();
+}
 
 QVector <Array> DataMeaningCore :: report()
 {

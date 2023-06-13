@@ -7,6 +7,7 @@
 #include "array.h"
 #include "datarow.h"
 #include "datameaningcore.h"
+#include "report.h"
 
 class DataMeaning
 {
@@ -24,6 +25,7 @@ public:
     QPair <QVector <double>, QVector <QString> > prepareToPredict(int fieldIndex);
     bool isSymbolHeaderField(int fieldIndex);
     QMap <QString, int> fieldKeys(QString field) ;
+    Report createReport(QString models);
 private:
     QVector <DataRow> m_dataRows;
     Array m_header;

@@ -5,6 +5,7 @@
 #include "ptable.h"
 #include "chart.h"
 #include "datameaning.h"
+#include "reporttabwidgetitem.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,6 +33,7 @@ private slots:
     void removeStatisticDataRow(int index);
     void buildChart();
     void selectSecondDataColumn(int index);
+    void buildReport();
 private:
     Ui::MainWindow *ui;
     Ptable * ptLoadedData;
@@ -40,6 +42,9 @@ private:
     Ptable * ptSecondData;
     Chart * chSecondChart;
     DataMeaning dataMeaning;
+
+    bool m_createReportFlag;
+    QVector <ReportTabWidgetItem *> m_reportTabWidgetItems;
 };
 #endif // MAINWINDOW_H
 
