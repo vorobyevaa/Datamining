@@ -5,6 +5,7 @@
 #include "ptable.h"
 #include "chart.h"
 #include "datameaning.h"
+#include "reporttabwidgetitem.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -43,6 +44,7 @@ private:
     DataMeaning dataMeaning;
 
     bool m_createReportFlag;
+    QVector <ReportTabWidgetItem *> m_reportTabWidgetItems;
 };
 #endif // MAINWINDOW_H
 

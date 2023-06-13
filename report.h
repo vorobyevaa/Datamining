@@ -11,6 +11,7 @@ public:
     Report();
     Array keys();
     Array keys(QString parentKey);
+    QVector <Array> values(QString parentKey);
 private:
     QString m_content;
     QJsonObject m_value;

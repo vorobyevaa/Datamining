@@ -191,23 +191,13 @@ void MainWindow :: buildReport()
     if (!m_createReportFlag)
     {
         qDebug()<<reportKeys;
+        m_reportTabWidgetItems.resize(reportKeys.size());
         QTabWidget * reportTabWidget = new QTabWidget(ui->f_result);
         reportTabWidget->resize(ui->f_result->size());
-        foreach (QString reportKey, reportKeys)
+        for (int i = 0; i < reportKeys.size(); i++)
         {
-            QTabWidget * reportTavWidgetItem = new QTabWidget(reportTabWidget);
-            reportTavWidgetItem->resize(reportTavWidgetItem->maximumSize());
-            reportTabWidget->addTab(reportTavWidgetItem, reportKey);
-            reportTavWidgetItem->show();
-
-            Array keys = report.keys(reportKey);
-            for (int i = 0; i < keys.size(); i++)
-            {
-                QLabel * label = new QLabel(reportTavWidgetItem);
-                label->setText(keys[i]);
-                label->setGeometry(0, i*50, 150, 25);
-                label->show();
-            }
+            m_reportTabWidgetItems[i] = new ReportTabWidgetItem(reportTabWidget, reportKeys[i]);
+            m_reportTabWidgetItems[i]->setValues(report.keys(reportKeys[i]), report.values(reportKeys[i]));
         }
         reportTabWidget->show();
         m_createReportFlag = true;
