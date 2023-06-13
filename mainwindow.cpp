@@ -4,10 +4,12 @@
 #include "report.h"
 #include "ui_mainwindow.h"
 #include <QPair>
+#include <QSizePolicy>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , m_createReportFlag(false)
 {
     ui->setupUi(this);
   //  setWindowFlags(windowFlags() &(~Qt::WindowMaximizeButtonHint));
@@ -184,4 +186,30 @@ void MainWindow :: buildReport()
     qDebug()<<models;
 
     Report report = dataMeaning.createReport(models);
+    Array reportKeys = report.keys();
+
+    if (!m_createReportFlag)
+    {
+        qDebug()<<reportKeys;
+        QTabWidget * reportTabWidget = new QTabWidget(ui->f_result);
+        reportTabWidget->resize(ui->f_result->size());
+        foreach (QString reportKey, reportKeys)
+        {
+            QTabWidget * reportTavWidgetItem = new QTabWidget(reportTabWidget);
+            reportTavWidgetItem->resize(reportTavWidgetItem->maximumSize());
+            reportTabWidget->addTab(reportTavWidgetItem, reportKey);
+            reportTavWidgetItem->show();
+
+            Array keys = report.keys(reportKey);
+            for (int i = 0; i < keys.size(); i++)
+            {
+                QLabel * label = new QLabel(reportTavWidgetItem);
+                label->setText(keys[i]);
+                label->setGeometry(0, i*50, 150, 25);
+                label->show();
+            }
+        }
+        reportTabWidget->show();
+        m_createReportFlag = true;
+    }
 }

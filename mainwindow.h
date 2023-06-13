@@ -41,6 +41,8 @@ private:
     Ptable * ptSecondData;
     Chart * chSecondChart;
     DataMeaning dataMeaning;
+
+    bool m_createReportFlag;
 };
 #endif // MAINWINDOW_H
 

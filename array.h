@@ -9,7 +9,9 @@ class Array : public QVector <QString>
 public:
     Array() {};
     Array(int size);
+    Array(QStringList value);
     QString implode(QString delimiter);
+    void operator = (QStringList value);
 };
 
 #endif // ARRAY_H
